@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "189bd730a7639f362b6fab10337fb038cfcaa1edabfd50c8ec01b5c25a6ac92c"
+            "sha256": "2fa92f7e5fefa210c5bb64a6258249969fe4e8c3029b52ea89b2c6a05e32f0a3"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -44,6 +44,14 @@
             ],
             "index": "pypi",
             "version": "==1.0.2"
+        },
+        "flask-cors": {
+            "hashes": [
+                "sha256:7ad56ee3b90d4955148fc25a2ecaa1124fc84298471e266a7fea59aeac4405a5",
+                "sha256:7e90bf225fdf163d11b84b59fb17594d0580a16b97ab4e1146b1fb2737c1cfec"
+            ],
+            "index": "pypi",
+            "version": "==3.0.7"
         },
         "itsdangerous": {
             "hashes": [
@@ -268,11 +276,11 @@
         },
         "pylint": {
             "hashes": [
-                "sha256:51f5a52bd31cb2db5b83ff37e3e902460eaa5591dea2739ba5d10d13ec5c5350",
-                "sha256:fe49f9ada5c8999344ac3a37541e329eaff11d014460065c4128fc94cf5cf140"
+                "sha256:8e645abc9572749f0256f05db86af81ea2e3d583086cc2b73d241a64ecf571b7",
+                "sha256:f70e1b78240ba7fea809ecc00fbfbc51615ab531ef3f76f0548072c732358453"
             ],
             "index": "pypi",
-            "version": "==2.2.0"
+            "version": "==2.2.1"
         },
         "six": {
             "hashes": [
