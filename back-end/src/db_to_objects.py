@@ -7,10 +7,10 @@ class Client:
         self.idnum, self.name = clientTuple
 
 def get_all_clients():
-    conn = psycopg2.connect("dbname=postgres")
+    conn = psycopg2.connect("dbname=evolveu")
     cur = conn.cursor()
 
-    cur.execute("SELECT * FROM storeclients;")
+    cur.execute("SELECT * FROM client;")
 
     clientInfoArray = cur.fetchall()
     

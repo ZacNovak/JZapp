@@ -24,9 +24,27 @@
 
 @keyframes App-logo-spin {
   from {
-    transform: rotate(0deg);
-  }
-  to {
     transform: rotate(360deg);
   }
+  to {
+    transform: rotate(0deg);
+  }
 }
+
+
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;  
+}
+
+.col-4{
+  width:32%;
+}
+
+.heading{
+  text-align: center;
+  
+}
+
