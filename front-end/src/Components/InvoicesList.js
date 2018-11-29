@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Invoices from './InvoicesComp';
+
 
 class InvoicesList extends Component {
     constructor(){
@@ -9,37 +11,48 @@ class InvoicesList extends Component {
         }
     }
 
+
+
     onClientClick = () => {
-        fetch('http://localhost:3000/client',{
-            method: 'post',
-            headers: {'Content type:':'application/json'},
-            body: JSON.stringify({
-                clientId: this.props.clientId
+        console.log('on client click is working')
+        if(this.state.client !== this.props.clientId){
+            this.setState({client:this.props.clientId})
+            fetch('http://localhost:5000/clients', {
+                method: 'post',
+                headers: {'Content-type':'application/json'},
+                body: JSON.stringify({
+                    id: this.props.clientId,
+                })
             })
-        })
+            .then(response => response.json())
+            .then(data => this.setState({invoices:data}))
+        }
     }
 
     render() {
-        if(this.props.clientId){
             this.onClientClick();
-            // this.setState({
-            //       client: this.props.clientId,
-            //     });            
-             return (
-                <div>
-                    <h1>{this.props.clientId}</h1>
-                </div>
-                
-            );
+            if(this.state.invoices){    
+                const invoiceComponent =this.state.invoices.map((user,i) => {
+                    return <Invoices id={this.state.invoices[i].id} date={this.state.invoices[i].date} location={this.state.invoices[i].location} />
+                })            
+                return (
+                    <div className="ClientComponent">
+                     {invoiceComponent}
+                    <div className='addClient'>
+                    <h2>Add New Invoice</h2>
+                    </div>
+                </div>   
+                );
             } else {
                 return(
-                <div>
-                    <h3>Please select a client</h3>
-                </div>
+                    <div>
+                        <h3>Please select a client</h3>
+                    </div>
                 );
             }
-            
+   
       }
-}
+    }
+
 
 export default InvoicesList;
