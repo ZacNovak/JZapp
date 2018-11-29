@@ -45,3 +45,25 @@ def get_client_invoices(id):
     conn.close()
     
     return clientInvoicesJSON 
+
+class Items:
+    def __init__(self,itemTuple):
+        self.id, self.name, self.invoice_id, self.price, self.gst, self.quantity = itemTuple
+
+def get_invoice_items(id):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+
+    cur.execute(f"SELECT * FROM items where invoice_id ={id};")
+
+    invoiceItemsArray = cur.fetchall()
+    
+    invoiceItemsJSON = []
+    for item in invoiceItemsArray:
+        newItem = Items(item)
+        invoiceItemsJSON.append(newItem.__dict__)
+
+    cur.close()
+    conn.close()
+    
+    return invoiceItemsJSON

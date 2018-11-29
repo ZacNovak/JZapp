@@ -1,5 +1,5 @@
 import unittest
-from db_to_objects import Client, Invoices
+from db_to_objects import Client, Invoices, Items
 import db_to_objects
 import datetime
 
@@ -22,5 +22,21 @@ class TestDBObjects(unittest.TestCase):
         self.assertEqual(2, test_invoices.client_id)
 
     def test_get_client_invoices(self):
-        self.assertEqual([{'id': 2, 'date':datetime.date(2018, 11, 20), 'location':'North', "client_id":2}, {'id': 6, 'date':datetime.date(2018, 11,21), 'location':'East',"client_id":2}], db_to_objects.get_client_invoices(2))
+        firstInvoice = {'id': 2, 'date':datetime.date(2018, 11, 20), 'location':'North', "client_id":2}
+        secondInvoice = {'id': 6, 'date':datetime.date(2018, 11,21), 'location':'East',"client_id":2}
+        self.assertEqual([firstInvoice, secondInvoice], db_to_objects.get_client_invoices(2))
+
+    def test_create_item(self):
+        test_item = Items((1,'Chocolate',1, 2.35,0.12,2))
+        self.assertEqual(1, test_item.id)
+        self.assertEqual('Chocolate',test_item.name)
+        self.assertEqual(1,test_item.invoice_id)
+        self.assertEqual(2.35,test_item.price)
+        self.assertEqual(0.12,test_item.gst)
+        self.assertEqual(2,test_item.quantity)
+
+    def test_get_invoice_items(self):
+        firstItem = {'id':5,'name':'Tea','invoice_id':3,'price':2.75,'gst':0.1375,'quantity':1}
+        secondItem = {'id':33,'name':'Gatorade','invoice_id':3,'price':2.5,'gst':0.125,'quantity':9}
+        self.assertEqual([firstItem,secondItem], db_to_objects.get_invoice_items(3))
     
