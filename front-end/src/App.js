@@ -3,12 +3,14 @@ import logo from './logo.svg';
 import './App.css'; 
 import ClientList from './Components/ClientsList.js';
 import InvoicesList from './Components/InvoicesList.js';
+import ItemsList from './Components/ItemsList';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      invoicesToShow: null
+      invoicesToShow: null,
+      itemsToShow: null
     }
   }
   
@@ -16,6 +18,12 @@ class App extends Component {
     this.setState({
       invoicesToShow: e.currentTarget.id
     })
+  }
+
+  onInvoice = (e) => {
+    this.setState({
+      itemsToShow: e.currentTarget.id
+    });
   }
 
 
@@ -35,10 +43,11 @@ class App extends Component {
             </div>
             <div className="col-4">
               <h2 className="heading">Invoices</h2>
-              <InvoicesList clientId={this.state.invoicesToShow}/>
+              <InvoicesList clientId={this.state.invoicesToShow} onInvoice={this.onInvoice}/>
             </div>
             <div className="col-4">
               <h2 className="heading">Items</h2>
+              <ItemsList invoiceID={this.state.itemsToShow}/>
             </div>
          
         </div>
