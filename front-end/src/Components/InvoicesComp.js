@@ -2,10 +2,10 @@ import React from 'react';
 import './ClientComp.css';
 
 
-const Invoice = ({id, date, location}) =>{
+const Invoices = ({id, date, location, onInvoice}) =>{
     return(
         <div>
-            <div className='clientCard' onClick={this.props.onInvoice}>
+            <div className='clientCard' id={id} onClick={onInvoice}>
                 <h2>Invoice ID: {id}</h2>
                 <h2>Date: {date}</h2>
                 <h2>Location: {location}</h2>
@@ -15,5 +15,5 @@ const Invoice = ({id, date, location}) =>{
     )
 }
 
-export default Invoice;
+export default Invoices;
 

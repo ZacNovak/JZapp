@@ -20,7 +20,10 @@ class ClientComp extends Component {
     render() {
         if(this.state.clients){
             const clientComponent =this.state.clients.map((user,i) => {
-                return <Client id={this.state.clients[i].idnum} name={this.state.clients[i].name} onClient={this.props.onClient}/>
+                return <Client id={this.state.clients[i].idnum} 
+                name={this.state.clients[i].name} 
+                onClient={this.props.onClient}
+                />
 
             }) 
             
@@ -44,48 +47,5 @@ class ClientComp extends Component {
             
       }
 }
-
-//class ClientListComp extends Component {
-
-    // showClients = () => {
-    //     let clientArr = this.props.clientList;
-    //     let clientHtmlStr = "";
-    //     // loop through array in props
-    //     for (let i=0; i<clientArr.length; i++){}
-    //     // generate a clickable link for every name in client array
-//     //     // set innerhtml of returning div
-//     // }
-    
-//     createClient = (client) => {
-//         return <button>{client}</button>
-//     }
-
-//     showClients = () => {
-//         let clientArr = this.props.clientList;
-//         let clientHtmlStr = "";
-//         // loop through client arr
-//         for (let i=0; i<clientArr.length; i++){
-//             //clientHtmlStr += this.createClient(clientArr[i].name);
-//             clientHtmlStr += clientArr[i].name + '<br>';
-//         }
-//         document.getElementById('SingleThing').setInnerHTML = clientHtmlStr;
-
-//     }
-
-//     render() {
-//         if (this.props.clientList) {
-//             return (
-//                 <div id='SingleThing'>{this.showClients()}</div>
-//             );
-//         } else {
-//             return (
-//                 <div id='SingleThing'>
-//                   <p>Empty client list</p>
-//                 </div>
-//               );
-//         }
-        
-//       }
-// }
 
 export default ClientComp;

@@ -14,9 +14,9 @@ class ItemsList extends Component {
 
 
     onInvoiceClick = () => {
-        console.log('on client click is working')
+        //console.log('on client click is working')
         if(this.state.invoice !== this.props.invoiceID){
-            this.setState({client:this.props.invoiceID})
+            this.setState({invoice:this.props.invoiceID})
             fetch('http://localhost:5000/invoices', {
                 method: 'post',
                 headers: {'Content-type':'application/json'},
@@ -31,13 +31,17 @@ class ItemsList extends Component {
 
     render() {
             this.onInvoiceClick();
+            console.log(this.props.invoiceID);
             if(this.state.items){    
                 const itemComponent =this.state.items.map((user,i) => {
-                    return <Items id={this.state.items[i].id} name={this.state.items[i].name} quantity={this.state.items[i].quantity} />
+                    return <Items id={this.state.items[i].id} 
+                    name={this.state.items[i].name} 
+                    quantity={this.state.items[i].quantity} 
+                    />
                 })            
                 return (
                     <div className="ClientComponent">
-                     {itemComponent}
+                    {itemComponent}
                     <div className='addClient'>
                     <h2>Add New Item</h2>
                     </div>

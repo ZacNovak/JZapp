@@ -2,7 +2,7 @@ import React from 'react';
 import './ClientComp.css';
 
 
-const Item = ({id, name, quantity}) =>{
+const Items = ({id, name, quantity}) =>{
     return(
         <div>
             <div className='clientCard'>
@@ -15,5 +15,5 @@ const Item = ({id, name, quantity}) =>{
     )
 }
 
-export default Item;
+export default Items;
 

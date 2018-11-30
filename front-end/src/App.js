@@ -28,6 +28,7 @@ class App extends Component {
 
 
   render() {
+    console.log(this.state.itemsToShow);
     return (
       <div>
         <div className="App">

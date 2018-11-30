@@ -33,7 +33,11 @@ class InvoicesList extends Component {
             this.onClientClick();
             if(this.state.invoices){    
                 const invoiceComponent =this.state.invoices.map((user,i) => {
-                    return <Invoices id={this.state.invoices[i].id} date={this.state.invoices[i].date} location={this.state.invoices[i].location} onInvoice={this.props.onInvoice}/>
+                    return <Invoices id={this.state.invoices[i].id} 
+                    date={this.state.invoices[i].date} 
+                    location={this.state.invoices[i].location} 
+                    onInvoice={this.props.onInvoice}
+                    />
                 })            
                 return (
                     <div className="ClientComponent">
