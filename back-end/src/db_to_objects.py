@@ -24,6 +24,37 @@ def get_all_clients():
     
     return clientObjArray
 
+def get_client(id):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+
+    cur.execute(f"SELECT * FROM client where id = {id};")
+
+    client = cur.fetchall()
+    print(client)
+    
+    clientObj = Client(client[0])
+
+    cur.close()
+    conn.close()
+
+    return clientObj.__dict__
+
+def add_client(client):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+    
+    cur.execute(f"INSERT INTO Client VALUES ({client.idnum}, '{client.name}');")
+    # cur.execute(f"SELECT * FROM client;")
+
+    # client = cur.fetchall()
+    # print(client)
+
+    conn.commit()
+
+    cur.close()
+    conn.close()
+
 class Invoices:
     def __init__(self,invoicesTuple):
         self.id, self.date, self.location, self.client_id = invoicesTuple

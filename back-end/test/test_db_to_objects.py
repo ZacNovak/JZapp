@@ -39,4 +39,14 @@ class TestDBObjects(unittest.TestCase):
         firstItem = {'id':5,'name':'Tea','invoice_id':3,'price':2.75,'gst':0.1375,'quantity':1}
         secondItem = {'id':33,'name':'Gatorade','invoice_id':3,'price':2.5,'gst':0.125,'quantity':9}
         self.assertEqual([firstItem,secondItem], db_to_objects.get_invoice_items(3))
+
+
+    def test_get_client(self):
+        self.assertEqual({'idnum':1, 'name':'Zac'}, db_to_objects.get_client(1))
+
+    def test_add_client_to_db(self):
+         test_client = Client((9,'Margo'))         
+         db_to_objects.add_client(test_client)
+         self.assertEqual(db_to_objects.get_client(9), {'idnum':9, 'name':'Margo'})
+
     
