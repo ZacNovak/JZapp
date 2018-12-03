@@ -1,51 +1,54 @@
 import React, { Component } from 'react';
-import Client from './ClientComp';
 import './ClientComp.css';
 
 
 class ClientComp extends Component {
-    constructor(){
-        super()
-        this.state = {
-            clients: null
+    render() {
+        if (this.props.clientsToShow) {
+            return (
+                <ListOfClients onClient={this.props.onClient} 
+                clientList = {this.props.clientsToShow}/>
+            );
+        } else {
+            return (
+                <div>
+                <h1>Loading</h1>
+                </div>
+            );
         }
     }
-
-    componentDidMount() {
-        fetch('http://localhost:5000/all_clients')
-        .then(response=> response.json())
-        .then(data => this.setState({clients:data}))
-    }
-
-    render() {
-        if(this.state.clients){
-            const clientComponent =this.state.clients.map((user,i) => {
-                return <Client id={this.state.clients[i].idnum} 
-                name={this.state.clients[i].name} 
-                onClient={this.props.onClient}
-                />
-
-            }) 
-            
-            return (
-           
-                <div className="ClientComponent">
-                    {clientComponent}
-                    <div className='addClient'>
-                        <h2>Add New Client</h2>
-                    </div>
-                </div>
-                
-            );
-            } else {
-                return(
-                <div>
-                    <h1>Loading</h1>
-                </div>
-                );
-            }
-            
-      }
 }
+
+// -------------------------------------------------------------- //
+
+function ListOfClients(props) {
+    if (props.clientList) {
+        let clientArr = props.clientList;
+        let clientsInList = clientArr.map((client,i) =>
+            <SingleClient key={clientArr[i].idnum} 
+            id={clientArr[i].idnum} 
+            name={clientArr[i].name}
+            onClient={props.onClient}
+            />
+        );
+        return (
+            <ul>{clientsInList}</ul>
+        );
+    } else {
+        return <p> No clients to show </p>
+    }
+}
+
+function SingleClient(props) {
+    return(
+        <div>
+            <div className='clientCard' id={props.id} onClick={props.onClient}>
+                <h2>{props.name}</h2>
+            </div>
+        </div>
+
+    );
+}
+
 
 export default ClientComp;

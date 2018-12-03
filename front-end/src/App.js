@@ -4,31 +4,51 @@ import './App.css';
 import ClientList from './Components/ClientsList.js';
 import InvoicesList from './Components/InvoicesList.js';
 import ItemsList from './Components/ItemsList';
+import AddNewClient from './Components/AddNewClient';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       invoicesToShow: null,
-      itemsToShow: null
+      itemsToShow: null,
+      clientsToShow: null
     }
   }
   
   onClient = (e) => {
-    this.setState({
-      invoicesToShow: e.currentTarget.id
-    })
+    this.setState({itemsToShow:null});
+    fetch('http://localhost:5000/clients', {
+                method: 'post',
+                headers: {'Content-type':'application/json'},
+                body: JSON.stringify({
+                    id: e.currentTarget.id,
+                })
+            })
+            .then(response => response.json())
+            .then(data => this.setState({invoicesToShow:data}))
   }
 
   onInvoice = (e) => {
-    this.setState({
-      itemsToShow: e.currentTarget.id
-    });
+    console.log(e.currentTarget.id);
+    fetch('http://localhost:5000/invoices', {
+                method: 'post',
+                headers: {'Content-type':'application/json'},
+                body: JSON.stringify({
+                    id: e.currentTarget.id,
+                })
+            })
+            .then(response => response.json())
+            .then(data => this.setState({itemsToShow:data}))
   }
 
+  componentDidMount() {
+    fetch('http://localhost:5000/all_clients')
+    .then(response=> response.json())
+    .then(data => this.setState({clientsToShow:data}));
+  }
 
   render() {
-    console.log(this.state.itemsToShow);
     return (
       <div>
         <div className="App">
@@ -39,16 +59,16 @@ class App extends Component {
         <div className="flex-container">
             <div className="col-4">
               <h2 className="heading">Clients</h2>
-              <ClientList onClient={this.onClient}/>
-
+              <ClientList clientsToShow={this.state.clientsToShow} onClient={this.onClient}/>
+              <AddNewClient/>
             </div>
             <div className="col-4">
               <h2 className="heading">Invoices</h2>
-              <InvoicesList clientId={this.state.invoicesToShow} onInvoice={this.onInvoice}/>
+              <InvoicesList invoicesToShow={this.state.invoicesToShow} onInvoice={this.onInvoice}/>
             </div>
             <div className="col-4">
               <h2 className="heading">Items</h2>
-              <ItemsList invoiceID={this.state.itemsToShow}/>
+              <ItemsList itemsToShow={this.state.itemsToShow}/>
             </div>
          
         </div>

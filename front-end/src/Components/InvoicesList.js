@@ -1,62 +1,56 @@
 import React, { Component } from 'react';
-import Invoices from './InvoicesComp';
-
 
 class InvoicesList extends Component {
-    constructor(){
-        super()
-        this.state = {
-            client: null,
-            invoices: null
-        }
-    }
-
-
-
-    onClientClick = () => {
-        console.log('on client click is working')
-        if(this.state.client !== this.props.clientId){
-            this.setState({client:this.props.clientId})
-            fetch('http://localhost:5000/clients', {
-                method: 'post',
-                headers: {'Content-type':'application/json'},
-                body: JSON.stringify({
-                    id: this.props.clientId,
-                })
-            })
-            .then(response => response.json())
-            .then(data => this.setState({invoices:data}))
-        }
-    }
 
     render() {
-            this.onClientClick();
-            if(this.state.invoices){    
-                const invoiceComponent =this.state.invoices.map((user,i) => {
-                    return <Invoices id={this.state.invoices[i].id} 
-                    date={this.state.invoices[i].date} 
-                    location={this.state.invoices[i].location} 
-                    onInvoice={this.props.onInvoice}
-                    />
-                })            
-                return (
-                    <div className="ClientComponent">
-                     {invoiceComponent}
-                    <div className='addClient'>
-                    <h2>Add New Invoice</h2>
-                    </div>
-                </div>   
-                );
-            } else {
-                return(
-                    <div>
-                        <h3>Please select a client</h3>
-                    </div>
-                );
-            }
+        console.log(this.props.invoicesToShow)
+        if (this.props.invoicesToShow) {
+            return (
+                <ListOfInvoices onInvoice={this.props.onInvoice}
+                invoiceList={this.props.invoicesToShow}/>
+            );
+        } else {
+            return(
+                <div>
+                    <h3>Please select a client</h3>
+                </div>
+            );
+        }
    
       }
     }
 
+// -------------------------------------------------------------- //
+
+function ListOfInvoices(props) {
+    if (props.invoiceList) {
+        let invoiceArr = props.invoiceList;
+        let invoicesInList = invoiceArr.map((invoice,i) =>
+            <SingleInvoice key={invoiceArr[i].id}
+            id={invoiceArr[i].id}
+            date={invoiceArr[i].date}
+            location={invoiceArr[i].location}
+            onInvoice={props.onInvoice}
+            />
+        );
+        return (
+            <ul>{invoicesInList}</ul>
+        );
+    } else {
+        return <p> No invoices to show </p>
+    }
+}
+
+function SingleInvoice(props) {
+    return(
+        <div>
+            <div className='invoiceCard' id={props.id} onClick={props.onInvoice}>
+                <h2>{props.date}</h2> 
+                <h2>Location: {props.location}</h2>
+            </div>
+        </div>
+
+    );
+}
 
 export default InvoicesList;
