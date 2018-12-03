@@ -26,6 +26,16 @@ def get_items():
     items = db_to_objects.get_invoice_items(id)
     return jsonify(items)
 
+@app.route("/newClient", methods=['GET', 'POST'])
+def add_new_client():
+    content = request.get_json()
+    name = content.get('name')
+    idnum = content.get('idnum')
+    newClient = db_to_objects.Client((idnum,name))
+    db_to_objects.add_client(newClient)
+    newClientList = db_to_objects.get_all_clients()
+    return jsonify(newClientList)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
 

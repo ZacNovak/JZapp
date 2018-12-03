@@ -48,6 +48,12 @@ class App extends Component {
     .then(data => this.setState({clientsToShow:data}));
   }
 
+  updateClientList = () => {
+    fetch('http://localhost:5000/all_clients')
+    .then(response=> response.json())
+    .then(data => this.setState({clientsToShow:data}));
+  }
+
   render() {
     return (
       <div>
@@ -60,7 +66,7 @@ class App extends Component {
             <div className="col-4">
               <h2 className="heading">Clients</h2>
               <ClientList clientsToShow={this.state.clientsToShow} onClient={this.onClient}/>
-              <AddNewClient/>
+              <AddNewClient updateclients={this.updateClientList}/>
             </div>
             <div className="col-4">
               <h2 className="heading">Invoices</h2>

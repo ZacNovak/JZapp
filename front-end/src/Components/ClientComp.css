@@ -19,24 +19,6 @@
     background-color: pink;
 }
 
-.addClient{
-    background-color: lightgreen;
-    border: black;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 70%;
-    font-size: 16px;
-    border-radius: 5px;
-    height: 30px;
-    padding: 2% 0;
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 7%;
-    vertical-align: middle;
-    line-height: 5px;
-    position: relative;
-}
-
 .invoiceCard{
     background-color: lightblue;
     border: black;
@@ -55,4 +37,22 @@
 
 .invoiceCard:hover{
     background-color: pink;
+}
+
+.newClientForm{
+    background-color: lightgreen;
+    border: black;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 70%;
+    font-size: 16px;
+    border-radius: 5px;
+    height: 60px;
+    padding: 2% 0;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 7%;
+    vertical-align: middle;
+    line-height: 5px;
+    position: relative;
 }

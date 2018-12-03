@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class InvoicesList extends Component {
 
     render() {
-        console.log(this.props.invoicesToShow)
         if (this.props.invoicesToShow) {
             return (
                 <ListOfInvoices onInvoice={this.props.onInvoice}

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class ItemsList extends Component {
 
     render() {
-        console.log(this.props.itemsToShow);
         if (this.props.itemsToShow) {
             return (
                 <ListOfItems itemsList={this.props.itemsToShow}/>

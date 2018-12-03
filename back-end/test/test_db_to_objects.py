@@ -49,4 +49,5 @@ class TestDBObjects(unittest.TestCase):
          db_to_objects.add_client(test_client)
          self.assertEqual(db_to_objects.get_client(9), {'idnum':9, 'name':'Margo'})
 
-    
+    def test_remove_client(self):
+        self.assertEqual(1, db_to_objects.remove_client(1))
