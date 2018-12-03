@@ -14,7 +14,7 @@ class AddNewClient extends Component {
 
     handleChange = (event) => {
         this.setState({name: event.target.value});
-        this.setState({id:Math.floor((Math.random() * 100) + 1)});
+        this.setState({id:Math.floor((Math.random() * 10000) + 1)});
     }
     
     handleSubmit = (event) => {

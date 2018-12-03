@@ -31,9 +31,12 @@ def get_client(id):
     cur.execute(f"SELECT * FROM client where id = {id};")
 
     client = cur.fetchall()
-    print(client)
-    
-    clientObj = Client(client[0])
+    if client == []:
+        cur.close()
+        conn.close()
+        return 'Client does not exist'
+    else:
+        clientObj = Client(client[0])
 
     cur.close()
     conn.close()
@@ -50,16 +53,15 @@ def add_client(client):
     cur.close()
     conn.close()
 
-def remove_client(client):
-    # conn = psycopg2.connect("dbname=evolveu")
-    # cur = conn.cursor()
+def remove_client(idnum):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
     
-    # cur.execute(f"INSERT INTO Client VALUES ({client.idnum}, '{client.name}');")
-    # conn.commit()
+    cur.execute(f"DELETE FROM Client WHERE id={idnum};")
+    conn.commit()
 
-    # cur.close()
-    # conn.close()
-    return 1
+    cur.close()
+    conn.close()
 
 class Invoices:
     def __init__(self,invoicesTuple):

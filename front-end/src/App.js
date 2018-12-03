@@ -54,6 +54,19 @@ class App extends Component {
     .then(data => this.setState({clientsToShow:data}));
   }
 
+  removeClient = (e) => {
+    console.log(e.currentTarget.id);
+    fetch('http://localhost:5000/rmClient', {
+                method: 'post',
+                headers: {'Content-type':'application/json'},
+                body: JSON.stringify({
+                    id: e.currentTarget.id,
+                })
+            })
+            .then(response => response.json())
+            .then(data => this.setState({clientsToShow:data}))
+  }
+
   render() {
     return (
       <div>
@@ -65,7 +78,10 @@ class App extends Component {
         <div className="flex-container">
             <div className="col-4">
               <h2 className="heading">Clients</h2>
-              <ClientList clientsToShow={this.state.clientsToShow} onClient={this.onClient}/>
+              <ClientList clientsToShow={this.state.clientsToShow} 
+              onClient={this.onClient}
+              rmFunc={this.removeClient}
+              />
               <AddNewClient updateclients={this.updateClientList}/>
             </div>
             <div className="col-4">

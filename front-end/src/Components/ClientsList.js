@@ -7,7 +7,9 @@ class ClientComp extends Component {
         if (this.props.clientsToShow) {
             return (
                 <ListOfClients onClient={this.props.onClient} 
-                clientList = {this.props.clientsToShow}/>
+                clientList = {this.props.clientsToShow}
+                rmFunc={this.props.rmFunc}
+                />
             );
         } else {
             return (
@@ -29,6 +31,7 @@ function ListOfClients(props) {
             id={clientArr[i].idnum} 
             name={clientArr[i].name}
             onClient={props.onClient}
+            rmFunc={props.rmFunc}
             />
         );
         return (
@@ -43,7 +46,8 @@ function SingleClient(props) {
     return(
         <div>
             <div className='clientCard' id={props.id} onClick={props.onClient}>
-                <h2>{props.name}</h2>
+                <h2>{props.name}</h2> 
+                <button id={props.id} onClick={props.rmFunc}>X</button>
             </div>
         </div>
 

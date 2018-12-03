@@ -36,6 +36,14 @@ def add_new_client():
     newClientList = db_to_objects.get_all_clients()
     return jsonify(newClientList)
 
+@app.route("/rmClient", methods=['GET', 'POST'])
+def remove_client():
+    content = request.get_json()
+    id = content.get('id')
+    db_to_objects.remove_client(id)
+    newClientList = db_to_objects.get_all_clients()
+    return jsonify(newClientList)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
 

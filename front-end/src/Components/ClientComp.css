@@ -1,3 +1,18 @@
+h2 {
+    display: inline-block;
+}
+
+button {
+    float: right;
+    border-radius: 10px;
+    background-color: rgb(56, 189, 233);
+    font-size: 16px;
+}
+
+button:hover{
+    background-color: rgb(255, 65, 97);
+}
+
 .clientCard{
     background-color: lightblue;
     border: black;

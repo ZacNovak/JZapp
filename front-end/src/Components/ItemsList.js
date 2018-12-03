@@ -42,9 +42,8 @@ function SingleItem(props) {
     return(
         <div>
             <div className='invoiceCard' id={props.id}>
-                <h2>{props.name}</h2> 
-                <h2>Quantity: {props.quantity}</h2>
-                <h2>Price: {props.price}</h2>
+                <h2>{props.name}</h2> <br></br>
+                <h2>Quantity: {props.quantity}, Price: {props.price}</h2> 
             </div>
         </div>
 

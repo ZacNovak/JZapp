@@ -50,4 +50,5 @@ class TestDBObjects(unittest.TestCase):
          self.assertEqual(db_to_objects.get_client(9), {'idnum':9, 'name':'Margo'})
 
     def test_remove_client(self):
-        self.assertEqual(1, db_to_objects.remove_client(1))
+        db_to_objects.remove_client(9)
+        self.assertEqual('Client does not exist', db_to_objects.get_client(9))
