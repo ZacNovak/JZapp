@@ -30,9 +30,7 @@ def get_items():
 def add_new_client():
     content = request.get_json()
     name = content.get('name')
-    idnum = content.get('idnum')
-    newClient = db_to_objects.Client((idnum,name))
-    db_to_objects.add_client(newClient)
+    db_to_objects.add_client(name)
     newClientList = db_to_objects.get_all_clients()
     return jsonify(newClientList)
 

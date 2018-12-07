@@ -7,22 +7,19 @@ class AddNewClient extends Component {
         super(props);
         this.state = {
             name: " ",
-            id: null
         };
         this.updateClients = this.props.updateclients;
     }
 
     handleChange = (event) => {
         this.setState({name: event.target.value});
-        this.setState({id:Math.floor((Math.random() * 10000) + 1)});
     }
     
     handleSubmit = (event) => {
-        console.log('A name was submitted: ' + this.state.name + ', id: '+ this.state.id);
+        console.log('A name was submitted: ' + this.state.name);
         event.preventDefault();
 
         let data = {
-            idnum:this.state.id,
             name:this.state.name
         }
  

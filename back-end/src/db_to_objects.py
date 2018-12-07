@@ -1,7 +1,5 @@
 import psycopg2
 
-
-
 class Client:
     def __init__(self,clientTuple):
         self.idnum, self.name = clientTuple
@@ -47,7 +45,7 @@ def add_client(client):
     conn = psycopg2.connect("dbname=evolveu")
     cur = conn.cursor()
     
-    cur.execute(f"INSERT INTO Client VALUES ({client.idnum}, '{client.name}');")
+    cur.execute(f"INSERT INTO Client(name) VALUES ('{client}');")
     conn.commit()
 
     cur.close()
@@ -62,6 +60,35 @@ def remove_client(idnum):
 
     cur.close()
     conn.close()
+
+def remove_client_by_name(name):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+    
+    cur.execute(f"DELETE FROM Client WHERE name='{name}';")
+    conn.commit()
+
+    cur.close()
+    conn.close()
+
+def get_clientid_by_name(name):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+
+    cur.execute(f"SELECT id FROM client where name = '{name}';")
+
+    client = cur.fetchall()
+    if client == []:
+        cur.close()
+        conn.close()
+        return 'Client does not exist'
+    else:
+        clientid = client[0][0]
+
+    cur.close()
+    conn.close()
+
+    return clientid
 
 class Invoices:
     def __init__(self,invoicesTuple):
