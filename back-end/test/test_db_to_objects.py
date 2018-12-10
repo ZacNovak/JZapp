@@ -71,7 +71,10 @@ class TestDBObjects(unittest.TestCase):
         test_invoice_id = db_to_objects.get_invoiceId_by_location("Test")
         self.assertEqual({'id':test_invoice_id, 'date':test_date, 'location':test_location, "client_id":test_client_id}, db_to_objects.get_invoice(test_invoice_id))
 
-    # def test_remove_client(self):
-    #     test_client_id = db_to_objects.get_clientid_by_name('Margo')
-    #     db_to_objects.remove_client(test_client_id)
-    #     self.assertEqual('Client does not exist', db_to_objects.get_client(test_client_id))
+    def test_remove_invoice(self):
+        testInvoiceID = db_to_objects.get_invoiceId_by_location('Test')
+        db_to_objects.remove_invoice(testInvoiceID)
+        self.assertEqual('Invoice does not exist', db_to_objects.get_invoice(testInvoiceID))
+
+    def test_get_client_invoices(self):
+        self.assertEqual([{'id':1, 'date':datetime.date(2018, 11, 20), 'location':'West', "client_id":1}], db_to_objects.get_client_invoices(1))

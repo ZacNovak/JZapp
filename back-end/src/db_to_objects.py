@@ -94,6 +94,7 @@ class Invoices:
     def __init__(self,invoicesTuple):
         self.id, self.date, self.location, self.client_id = invoicesTuple
 
+
 def get_client_invoices(id):
     conn = psycopg2.connect("dbname=evolveu")
     cur = conn.cursor()
@@ -160,6 +161,15 @@ def add_invoice(date, location, client_id):
     cur.close()
     conn.close()
 
+def remove_invoice(idnum):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+    
+    cur.execute(f"DELETE FROM Invoices WHERE id={idnum};")
+    conn.commit()
+
+    cur.close()
+    conn.close()
 
 class Items:
     def __init__(self,itemTuple):
@@ -179,6 +189,6 @@ def get_invoice_items(id):
         invoiceItemsJSON.append(newItem.__dict__)
 
     cur.close()
-    conn.close()c
+    conn.close()
     
     return invoiceItemsJSON

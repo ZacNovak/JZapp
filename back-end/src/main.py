@@ -9,6 +9,7 @@ CORS(app)
 
 @app.route("/all_clients")
 def all_clients():
+
     clients = db_to_objects.get_all_clients()
     return jsonify(clients)
 
@@ -42,6 +43,28 @@ def remove_client():
     newClientList = db_to_objects.get_all_clients()
     return jsonify(newClientList)
 
+@app.route("/newInvoice", methods=['GET', 'POST'])
+def add_new_invoice():
+    content = request.get_json()
+    # id = content.get('id')
+    date = content.get('date')
+    location = content.get('location')
+    client_id= content.get('clientId')
+    # newInvoice = db_to_objects.Invoices((id,date,location,client_id))
+    db_to_objects.add_invoice(date,location,client_id)
+    newInvoiceList = db_to_objects.get_client_invoices(client_id)
+    return jsonify(newInvoiceList)
+
+@app.route("/rmInvoice", methods=['GET', 'POST'])
+def remove_invoice():
+    content = request.get_json()
+    id = content.get('id')
+    client_id = content.get('clientId')
+    db_to_objects.remove_invoice(id)
+    newInvoiceList = db_to_objects.get_client_invoices(client_id)
+    return jsonify(newInvoiceList)
+
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-
