@@ -110,7 +110,56 @@ def get_client_invoices(id):
     cur.close()
     conn.close()
     
-    return clientInvoicesJSON 
+    return clientInvoicesJSON
+
+def get_invoice(id):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+
+    cur.execute(f"SELECT * FROM invoices where id = {id};")
+
+    invoice = cur.fetchall()
+    if invoice == []:
+        cur.close()
+        conn.close()
+        return 'Invoice does not exist'
+    else:
+        invoiceObj = Invoices(invoice[0])
+
+    cur.close()
+    conn.close()
+
+    return invoiceObj.__dict__
+
+def get_invoiceId_by_location(location):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+
+    cur.execute(f"SELECT id FROM invoices where location = '{location}';")
+
+    invoice = cur.fetchall()
+    if invoice == []:
+        cur.close()
+        conn.close()
+        return 'Invoice does not exist'
+    else:
+        invoiceid = invoice[0][0]
+
+    cur.close()
+    conn.close()
+
+    return invoiceid
+
+def add_invoice(date, location, client_id):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+    
+    cur.execute(f"INSERT INTO Invoices(date, location, client_id) VALUES ('{date}','{location}','{client_id}');")
+    conn.commit()
+
+    cur.close()
+    conn.close()
+
 
 class Items:
     def __init__(self,itemTuple):
@@ -130,6 +179,6 @@ def get_invoice_items(id):
         invoiceItemsJSON.append(newItem.__dict__)
 
     cur.close()
-    conn.close()
+    conn.close()c
     
     return invoiceItemsJSON
