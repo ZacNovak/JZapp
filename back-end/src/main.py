@@ -46,11 +46,9 @@ def remove_client():
 @app.route("/newInvoice", methods=['GET', 'POST'])
 def add_new_invoice():
     content = request.get_json()
-    # id = content.get('id')
     date = content.get('date')
     location = content.get('location')
     client_id= content.get('clientId')
-    # newInvoice = db_to_objects.Invoices((id,date,location,client_id))
     db_to_objects.add_invoice(date,location,client_id)
     newInvoiceList = db_to_objects.get_client_invoices(client_id)
     return jsonify(newInvoiceList)
