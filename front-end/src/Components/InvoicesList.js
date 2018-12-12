@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+import AddNewInvoice from './AddNewInvoice.js';
+
 
 class InvoicesList extends Component {
 
     render() {
         if (this.props.invoicesToShow) {
             return (
-                <ListOfInvoices onInvoice={this.props.onInvoice}
-                invoiceList={this.props.invoicesToShow}/>
+                <div>
+                    <ListOfInvoices onInvoice={this.props.onInvoice}
+                    invoiceList={this.props.invoicesToShow}
+                    rmInvoice={this.props.rmInvoice}/>
+                    <AddNewInvoice clientId={this.props.clientId} 
+                    updateInvoiceList={this.props.updateInvoiceList} />
+                </div>
             );
         } else {
             return(
@@ -30,6 +37,7 @@ function ListOfInvoices(props) {
             date={invoiceArr[i].date}
             location={invoiceArr[i].location}
             onInvoice={props.onInvoice}
+            rmInvoice={props.rmInvoice}
             />
         );
         return (
@@ -46,6 +54,7 @@ function SingleInvoice(props) {
             <div className='invoiceCard' id={props.id} onClick={props.onInvoice}>
                 <h2>{props.date}</h2> 
                 <h2>Location: {props.location}</h2>
+                <button id={props.id} onClick={props.rmInvoice}>x</button>
             </div>
         </div>
 

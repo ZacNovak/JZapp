@@ -12,12 +12,14 @@ class App extends Component {
     this.state = {
       invoicesToShow: null,
       itemsToShow: null,
-      clientsToShow: null
+      clientsToShow: null,
+      clientId: null
     }
   }
   
   onClient = (e) => {
     this.setState({itemsToShow:null});
+    this.setState({clientId: e.currentTarget.id});
     fetch('http://localhost:5000/clients', {
                 method: 'post',
                 headers: {'Content-type':'application/json'},
@@ -30,7 +32,7 @@ class App extends Component {
   }
 
   onInvoice = (e) => {
-    console.log(e.currentTarget.id);
+    //console.log(e.currentTarget.id);
     fetch('http://localhost:5000/invoices', {
                 method: 'post',
                 headers: {'Content-type':'application/json'},
@@ -47,6 +49,19 @@ class App extends Component {
     .then(response=> response.json())
     .then(data => this.setState({clientsToShow:data}));
   }
+
+  updateInvoiceList = () => {
+    fetch('http://localhost:5000/clients', {
+                method: 'post',
+                headers: {'Content-type':'application/json'},
+                body: JSON.stringify({
+                    id: this.state.clientId,
+                })
+            })
+            .then(response => response.json())
+            .then(data => this.setState({invoicesToShow:data}))
+  }
+
 
   updateClientList = () => {
     fetch('http://localhost:5000/all_clients')
@@ -65,6 +80,26 @@ class App extends Component {
             })
             .then(response => response.json())
             .then(data => this.setState({clientsToShow:data}))
+  }
+
+  removeInvoice = (e) => {
+    console.log(e.currentTarget.id);
+    console.log("i am working");
+
+    let data = {
+      id: e.currentTarget.id,
+      clientId: this.state.clientId
+    }
+
+    console.log(data)
+
+    fetch('http://localhost:5000/rmInvoice', {
+                method: 'post',
+                headers: {'Content-type':'application/json'},
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => this.setState({invoicesToShow:data}))
   }
 
   render() {
@@ -86,7 +121,13 @@ class App extends Component {
             </div>
             <div className="col-4">
               <h2 className="heading">Invoices</h2>
-              <InvoicesList invoicesToShow={this.state.invoicesToShow} onInvoice={this.onInvoice}/>
+              <InvoicesList 
+              invoicesToShow={this.state.invoicesToShow} 
+              onInvoice={this.onInvoice} 
+              updateInvoiceList={this.updateInvoiceList} 
+              clientId={this.state.clientId}
+              rmInvoice={this.removeInvoice}
+              />
             </div>
             <div className="col-4">
               <h2 className="heading">Items</h2>

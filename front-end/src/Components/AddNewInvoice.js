@@ -32,7 +32,7 @@ class AddNewInvoice extends Component {
             clientId: this.props.clientId
         }
 
-        // console.log(data);
+        console.log(data);
 
         
  
