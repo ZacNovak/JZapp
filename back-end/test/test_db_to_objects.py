@@ -56,7 +56,8 @@ class TestDBObjects(unittest.TestCase):
         self.assertEqual('Client does not exist', db_to_objects.get_client(test_client_id))
 
     def test_get_invoice(self):
-        self.assertEqual({'id':1, 'date':datetime.date(2018, 11, 20), 'location':'West', "client_id":1}, db_to_objects.get_invoice(1), db_to_objects.get_invoice(1))
+        expectedResult = {'id':1, 'date':datetime.date(2018, 11, 20), 'location':'West', "client_id":1}
+        self.assertEqual(expectedResult, db_to_objects.get_invoice(1))
 
     def test_get_invoicesid_by_location(self):
         testInvoiceID = db_to_objects.get_invoiceId_by_location('West')
@@ -78,3 +79,19 @@ class TestDBObjects(unittest.TestCase):
 
     def test_get_client_invoices(self):
         self.assertEqual([{'id':1, 'date':datetime.date(2018, 11, 20), 'location':'West', "client_id":1}], db_to_objects.get_client_invoices(1))
+    
+    def test_get_itemid_by_name(self):
+        self.assertEqual(db_to_objects.get_itemid_by_name('Bagel'),9)
+        self.assertEqual(db_to_objects.get_itemid_by_name('Funk'),'Item does not exist')
+
+    def test_add_remove_item(self):
+        testname = 'Junk'
+        testinvoiceid = 30
+        testprice = 32.45
+        testgst = 1.34
+        testquantity = 10
+        db_to_objects.add_item(testname,testinvoiceid,testprice,testgst,testquantity)
+        testid = db_to_objects.get_itemid_by_name('Junk')
+        db_to_objects.remove_item(testid)
+        self.assertEqual(db_to_objects.get_item(testid),'Item does not exist')
+        
