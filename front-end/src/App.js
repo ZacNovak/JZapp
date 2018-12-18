@@ -114,7 +114,35 @@ class App extends Component {
     if (e.stopPropagation) e.stopPropagation();
     document.getElementById("overlay").style.display = "block";
     e.preventDefault();
+  }
 
+  removeItem = (e) => {
+    console.log(e.currentTarget.id);
+
+    let data = {
+      id: e.currentTarget.id,
+      invoice_id: this.state.invoiceId
+    };
+
+    fetch('http://localhost:5000/rmItem', {
+      method: 'post',
+      headers: {'Content-type':'application/json'},
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => this.setState({itemsToShow:data}))
+  }
+
+  updateItemList = () => {
+    fetch('http://localhost:5000/invoices', {
+                method: 'post',
+                headers: {'Content-type':'application/json'},
+                body: JSON.stringify({
+                    id: this.state.invoiceId,
+                })
+            })
+            .then(response => response.json())
+            .then(data => this.setState({itemsToShow:data}))
   }
 
   render() {
@@ -151,7 +179,11 @@ class App extends Component {
                 </div>
                 <div className="col-4">
                   <h2 className="heading">Items</h2>
-                  <ItemsList itemsToShow={this.state.itemsToShow}/>
+                  <ItemsList itemsToShow={this.state.itemsToShow}
+                    updateItemList={this.updateItemList}
+                    invoiceId={this.state.invoiceId}
+                    removeItem={this.removeItem}
+                  />
                 </div>
             </div>
         </div>
@@ -159,6 +191,6 @@ class App extends Component {
 
     );
   }
-}
+  }
 
 export default App;

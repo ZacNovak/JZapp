@@ -202,3 +202,61 @@ def get_invoice_items(id):
     conn.close()
     
     return invoiceItemsJSON
+
+def get_itemid_by_name(name):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+
+    cur.execute(f"SELECT id FROM items where name = '{name}';")
+
+    invoice = cur.fetchall()
+    if invoice == []:
+        cur.close()
+        conn.close()
+        return 'Item does not exist'
+    else:
+        invoiceid = invoice[0][0]
+
+    cur.close()
+    conn.close()
+
+    return invoiceid
+
+def add_item(name,invoice_id,price,gst,quantity):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+    
+    cur.execute(f"INSERT INTO items(name, invoice_id, price, gst, quantity) VALUES ('{name}','{invoice_id}','{price}','{gst}','{quantity}');")
+    conn.commit()
+
+    cur.close()
+    conn.close()
+
+def remove_item(id):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+    
+    cur.execute(f"DELETE FROM items WHERE id={id};")
+    conn.commit()
+
+    cur.close()
+    conn.close()
+
+def get_item(id):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+
+    cur.execute(f"SELECT * FROM items where id = {id};")
+
+    Item = cur.fetchall()
+    if Item == []:
+        cur.close()
+        conn.close()
+        return 'Item does not exist'
+    else:
+        ItemObj = Items(Item[0])
+
+    cur.close()
+    conn.close()
+
+    return ItemObj.__dict__
