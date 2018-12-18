@@ -24,8 +24,7 @@ class ClientComp extends Component {
                     rmFunc={this.props.rmFunc}
                     updateclients={this.props.updateclients}
                     clientId={this.props.clientId}
-                    openForm={this.openForm}
-                    closeForm={this.closeForm}
+                    on={this.props.on}
                     />
                     <AddNewClient updateclients={this.props.updateclients}/>
                     
@@ -61,6 +60,7 @@ function ListOfClients(props) {
             clientId={props.clientId}
             openForm={props.openForm}
             closeForm={props.closeForm}
+            on={props.on}
             />,            
         );
         return (
@@ -82,6 +82,9 @@ class SingleClient extends Component {
     }
     
     on = (event) => {
+        if (!e) var e = window.event;
+        e.cancelBubble = true;
+        if (e.stopPropagation) e.stopPropagation();
         document.getElementById("overlay").style.display = "block";
         event.preventDefault();
         
@@ -90,6 +93,7 @@ class SingleClient extends Component {
       
     off = (event) => {
         document.getElementById("overlay").style.display = "none";
+
     }
 
     handleChange = (event) => {
@@ -136,8 +140,7 @@ class SingleClient extends Component {
             <div>
                 <div className={classType} id={this.props.id} onClick={this.props.onClient}>
                     <h2 className = "clientName">{this.props.name}</h2>
-                    <button id={this.props.id} onClick={this.props.rmFunc}>X</button>
-                    <button onClick={this.on}>Edit</button>
+                    <button onClick={this.props.on}>Edit</button>
                     <div id="overlay" >
                         <div id="modal">
                             <h1>Update Client</h1>
@@ -156,6 +159,7 @@ class SingleClient extends Component {
                             </div>
                         </div>
                     </div>
+                    <button id={this.props.id} onClick={this.props.rmFunc}>X</button>
                 </div>
             </div>
         </div>

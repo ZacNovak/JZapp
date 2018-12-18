@@ -108,6 +108,15 @@ class App extends Component {
             .then(data => this.setState({invoicesToShow:data}))
   }
 
+  on = (e) => {
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
+    document.getElementById("overlay").style.display = "block";
+    e.preventDefault();
+
+  }
+
   render() {
     return (
       <div>
@@ -126,6 +135,7 @@ class App extends Component {
                   rmFunc={this.removeClient}
                   updateclients={this.updateClientList}
                   clientId={this.state.clientId}
+                  on={this.on}
                   />
                 </div>
                 <div className="col-4">
