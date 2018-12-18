@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
 import './ClientComp.css';
 import UpdateClient from './UpdateClient.js';
+import AddNewClient from './AddNewClient';
+
 
 
 
 class ClientComp extends Component {
     constructor(props){
         super(props);
+        
         this.updateclients = this.props.updateclients;
     }
     
     render() {
         if (this.props.clientsToShow) {
             return (
-                <ListOfClients onClient={this.props.onClient} 
-                clientList = {this.props.clientsToShow}
-                rmFunc={this.props.rmFunc}
-                updateclients={this.props.updateclients}
-                clientId={this.props.clientId}
-                />
+                <div>
+                    <ListOfClients onClient={this.props.onClient} 
+                    clientList = {this.props.clientsToShow}
+                    rmFunc={this.props.rmFunc}
+                    updateclients={this.props.updateclients}
+                    clientId={this.props.clientId}
+                    />
+                    <AddNewClient updateclients={this.props.updateclients}/>
+                    
+                </div>
             );
         } else {
             return (
@@ -36,6 +43,7 @@ function ListOfClients(props) {
     
     if (props.clientList) {
         let clientArr = props.clientList;
+        let clientCount = clientArr.length
         clientArr.sort(function(a, b) { 
             return a.idnum - b.idnum;
           });
@@ -47,7 +55,7 @@ function ListOfClients(props) {
             rmFunc={props.rmFunc}
             updateclients={props.updateclients}
             clientId={props.clientId}
-            />
+            />,            
         );
         return (
             <ul>{clientsInList}</ul>

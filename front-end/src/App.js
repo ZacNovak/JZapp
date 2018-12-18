@@ -66,18 +66,17 @@ class App extends Component {
 
 
   updateClientList = () => {
-    console.log("updateclients ahs been fetched")
     fetch('http://localhost:5000/all_clients')
     .then(response=> response.json())
     .then(data => this.setState({clientsToShow:data}));
   }
 
   removeClient = (e) => {
+    this.setState({invoicesToShow:null});
     if (!e) var e = window.event;
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
     
-    console.log(e.currentTarget.id);
     fetch('http://localhost:5000/rmClient', {
                 method: 'post',
                 headers: {'Content-type':'application/json'},
@@ -90,6 +89,7 @@ class App extends Component {
   }
 
   removeInvoice = (e) => {
+    this.setState({itemsToShow:null});
     if (!e) var e = window.event;
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
@@ -129,7 +129,6 @@ class App extends Component {
                   updateclients={this.updateClientList}
                   clientId={this.state.clientId}
                   />
-                  <AddNewClient updateclients={this.updateClientList}/>
                 </div>
                 <div className="col-4">
                   <h2 className="heading">Invoices</h2>
