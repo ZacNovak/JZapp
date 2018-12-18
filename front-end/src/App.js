@@ -108,6 +108,10 @@ class App extends Component {
             .then(data => this.setState({invoicesToShow:data}))
   }
 
+  updateItemList = () => {
+    console.log('dummy message from updateItemList')
+  }
+
   render() {
     return (
       <div>
@@ -141,7 +145,10 @@ class App extends Component {
                 </div>
                 <div className="col-4">
                   <h2 className="heading">Items</h2>
-                  <ItemsList itemsToShow={this.state.itemsToShow}/>
+                  <ItemsList itemsToShow={this.state.itemsToShow}
+                    updateItemList={this.updateItemList}
+                    invoiceId={this.state.invoiceId}
+                  />
                 </div>
             </div>
         </div>

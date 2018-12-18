@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
+import AddNewClient from './AddNewItem';
 
 class ItemsList extends Component {
 
     render() {
         if (this.props.itemsToShow) {
             return (
-                <ListOfItems itemsList={this.props.itemsToShow}/>
+                <div>
+                    <ListOfItems itemsList={this.props.itemsToShow}/>
+                    <AddNewClient 
+                    updateItemsList={this.props.updateItemsList}
+                    invoiceId={this.props.invoiceId}
+                    />
+                </div>
             );
         } else {
             return(
