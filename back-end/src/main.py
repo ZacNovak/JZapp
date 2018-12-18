@@ -35,6 +35,15 @@ def add_new_client():
     newClientList = db_to_objects.get_all_clients()
     return jsonify(newClientList)
 
+@app.route("/updateClient", methods=['PUT'])
+def update_client():
+    content = request.get_json()
+    name = content.get('name')
+    id = content.get('id')
+    db_to_objects.update_client(id, name)
+    newClientList = db_to_objects.get_all_clients()
+    return jsonify(newClientList)
+
 @app.route("/rmClient", methods=['GET', 'POST'])
 def remove_client():
     content = request.get_json()

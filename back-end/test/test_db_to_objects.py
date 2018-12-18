@@ -78,3 +78,8 @@ class TestDBObjects(unittest.TestCase):
 
     def test_get_client_invoices(self):
         self.assertEqual([{'id':1, 'date':datetime.date(2018, 11, 20), 'location':'West', "client_id":1}], db_to_objects.get_client_invoices(1))
+
+    def test_update_client(self):
+        testID = db_to_objects.get_clientid_by_name('Zac')
+        db_to_objects.update_client(testID,'Margo')
+        self.assertEqual({'idnum':1, 'name':'Margo'}, db_to_objects.get_client(1))

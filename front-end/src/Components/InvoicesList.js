@@ -10,7 +10,9 @@ class InvoicesList extends Component {
                 <div>
                     <ListOfInvoices onInvoice={this.props.onInvoice}
                     invoiceList={this.props.invoicesToShow}
-                    rmInvoice={this.props.rmInvoice}/>
+                    rmInvoice={this.props.rmInvoice}
+                    invoiceId={this.props.invoiceId}
+                    />
                     <AddNewInvoice clientId={this.props.clientId} 
                     updateInvoiceList={this.props.updateInvoiceList} />
                 </div>
@@ -18,7 +20,7 @@ class InvoicesList extends Component {
         } else {
             return(
                 <div>
-                    <h3>Please select a client</h3>
+                    <h3 className="await">Please select a client</h3>
                 </div>
             );
         }
@@ -38,6 +40,7 @@ function ListOfInvoices(props) {
             location={invoiceArr[i].location}
             onInvoice={props.onInvoice}
             rmInvoice={props.rmInvoice}
+            invoiceId={props.invoiceId}
             />
         );
         return (
@@ -49,10 +52,24 @@ function ListOfInvoices(props) {
 }
 
 function SingleInvoice(props) {
+    let date = props.date;
+    date = date.substring(0,16);
+    
+    let classType = "";
+    let id = props.id;
+    let invoiceId = props.invoiceId;
+
+    if(parseInt(id) === parseInt(invoiceId)){    
+        classType = "invoiceCardSelected"
+     } else {
+        classType = "invoiceCard"
+    }
+
+        
     return(
         <div>
-            <div className='invoiceCard' id={props.id} onClick={props.onInvoice}>
-                <h2>{props.date}</h2> 
+            <div className={classType} id={props.id} onClick={props.onInvoice}>
+                <h2>Date: {date}</h2><br/>
                 <h2>Location: {props.location}</h2>
                 <button id={props.id} onClick={props.rmInvoice}>x</button>
             </div>

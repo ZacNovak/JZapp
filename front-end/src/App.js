@@ -13,7 +13,8 @@ class App extends Component {
       invoicesToShow: null,
       itemsToShow: null,
       clientsToShow: null,
-      clientId: null
+      clientId: null,
+      invoiceId: null
     }
   }
   
@@ -33,6 +34,7 @@ class App extends Component {
 
   onInvoice = (e) => {
     //console.log(e.currentTarget.id);
+    this.setState({invoiceId: e.currentTarget.id})
     fetch('http://localhost:5000/invoices', {
                 method: 'post',
                 headers: {'Content-type':'application/json'},
@@ -64,12 +66,17 @@ class App extends Component {
 
 
   updateClientList = () => {
+    console.log("updateclients ahs been fetched")
     fetch('http://localhost:5000/all_clients')
     .then(response=> response.json())
     .then(data => this.setState({clientsToShow:data}));
   }
 
   removeClient = (e) => {
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
+    
     console.log(e.currentTarget.id);
     fetch('http://localhost:5000/rmClient', {
                 method: 'post',
@@ -83,9 +90,10 @@ class App extends Component {
   }
 
   removeInvoice = (e) => {
-    console.log(e.currentTarget.id);
-    console.log("i am working");
-
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
+    
     let data = {
       id: e.currentTarget.id,
       clientId: this.state.clientId
@@ -107,33 +115,38 @@ class App extends Component {
       <div>
         <div className="App">
           <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
+            <h1> Welcome to JZ Store of Goodies</h1>
+            {/* <img src={logo} className="App-logo" alt="logo" /> */}
           </header>
         </div>
-        <div className="flex-container">
-            <div className="col-4">
-              <h2 className="heading">Clients</h2>
-              <ClientList clientsToShow={this.state.clientsToShow} 
-              onClient={this.onClient}
-              rmFunc={this.removeClient}
-              />
-              <AddNewClient updateclients={this.updateClientList}/>
+        <div className="background">
+            <div className="flex-container">
+                <div className="col-4">
+                  <h2 className="heading">Clients</h2>
+                  <ClientList clientsToShow={this.state.clientsToShow} 
+                  onClient={this.onClient}
+                  rmFunc={this.removeClient}
+                  updateclients={this.updateClientList}
+                  clientId={this.state.clientId}
+                  />
+                  <AddNewClient updateclients={this.updateClientList}/>
+                </div>
+                <div className="col-4">
+                  <h2 className="heading">Invoices</h2>
+                  <InvoicesList 
+                  invoicesToShow={this.state.invoicesToShow} 
+                  onInvoice={this.onInvoice} 
+                  updateInvoiceList={this.updateInvoiceList} 
+                  clientId={this.state.clientId}
+                  rmInvoice={this.removeInvoice}
+                  invoiceId={this.state.invoiceId}
+                  />
+                </div>
+                <div className="col-4">
+                  <h2 className="heading">Items</h2>
+                  <ItemsList itemsToShow={this.state.itemsToShow}/>
+                </div>
             </div>
-            <div className="col-4">
-              <h2 className="heading">Invoices</h2>
-              <InvoicesList 
-              invoicesToShow={this.state.invoicesToShow} 
-              onInvoice={this.onInvoice} 
-              updateInvoiceList={this.updateInvoiceList} 
-              clientId={this.state.clientId}
-              rmInvoice={this.removeInvoice}
-              />
-            </div>
-            <div className="col-4">
-              <h2 className="heading">Items</h2>
-              <ItemsList itemsToShow={this.state.itemsToShow}/>
-            </div>
-         
         </div>
       </div>
 

@@ -90,6 +90,16 @@ def get_clientid_by_name(name):
 
     return clientid
 
+def update_client(id, name):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+
+    cur.execute(f"Update client Set name = '{name}' where id = {id};")
+    conn.commit()
+
+    cur.close()
+    conn.close()    
+
 class Invoices:
     def __init__(self,invoicesTuple):
         self.id, self.date, self.location, self.client_id = invoicesTuple

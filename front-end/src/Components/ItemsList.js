@@ -10,7 +10,7 @@ class ItemsList extends Component {
         } else {
             return(
                 <div>
-                    <h3>Please select an invoice </h3>
+                    <h3 className="await">Please select an invoice </h3>
                 </div>
             );
         }
@@ -41,7 +41,7 @@ function ListOfItems(props) {
 function SingleItem(props) {
     return(
         <div>
-            <div className='invoiceCard' id={props.id}>
+            <div className='itemCard' id={props.id}>
                 <h2>{props.name}</h2> <br></br>
                 <h2>Quantity: {props.quantity}, Price: {props.price}</h2> 
             </div>
