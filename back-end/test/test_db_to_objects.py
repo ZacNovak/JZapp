@@ -95,3 +95,8 @@ class TestDBObjects(unittest.TestCase):
         db_to_objects.remove_item(testid)
         self.assertEqual(db_to_objects.get_item(testid),'Item does not exist')
         
+
+    def test_update_client(self):
+        testID = db_to_objects.get_clientid_by_name('Zac')
+        db_to_objects.update_client(testID,'Margo')
+        self.assertEqual({'idnum':1, 'name':'Margo'}, db_to_objects.get_client(1))
