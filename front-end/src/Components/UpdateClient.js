@@ -37,6 +37,7 @@ class UpdateClient extends Component {
             })
             .then(response => response.json())
             .then(this.updateClients)
+             
             
         
     }
@@ -60,7 +61,6 @@ class UpdateClient extends Component {
                         <input type="text" value={this.state.name} onChange={this.handleChange}/>
                         </label>
                     <input className="submit" type="submit" value="Submit" />
-                    
                 </form>
                 </div>
                 <div className="actions">
