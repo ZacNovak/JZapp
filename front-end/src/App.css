@@ -8,14 +8,15 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 15vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url("./img/pattern.jpg");
+  min-height: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+
 }
 
 .App-link {
@@ -30,13 +31,19 @@
     transform: rotate(0deg);
   }
 }
-
-
+.background{
+  background-image: linear-gradient(rgba(50, 50, 50, 0.8), rgba(50, 50, 50, 0.8)), url("./img/shoppin1.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 95vh;
+  background-attachment: fixed;
+}
 
 .flex-container {
   display: flex;
   flex-direction: row;
-  width: 100%;  
+  width: 100%;
+ 
 }
 
 .col-4{
@@ -44,7 +51,19 @@
 }
 
 .heading{
-    /* text-align: center; */
-  padding: 0 30%;  
+    text-align: center;
+  padding: 4% 30% 0% 30%; 
+  color: white;
+  background-color:#5164da;
+  border-color: white;
+  border: 3px;
+  margin-left: 29px;
+  width: 28%;
+  height: 50px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px black;
+  vertical-align: middle;
+
+
 }
 

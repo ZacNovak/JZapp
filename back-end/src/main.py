@@ -71,26 +71,6 @@ def remove_invoice():
     newInvoiceList = db_to_objects.get_client_invoices(client_id)
     return jsonify(newInvoiceList)
 
-@app.route("/newItem", methods=['GET', 'POST'])
-def add_new_item():
-    content = request.get_json()
-    name = content.get('name')
-    invoice_id = content.get('invoice_id')
-    price = content.get('price')
-    gst = content.get('gst')
-    quantity = content.get('quantity')
-    db_to_objects.add_item(name,invoice_id,price,gst,quantity)
-    newItemsList = db_to_objects.get_invoice_items(invoice_id)
-    return jsonify(newItemsList)
-
-@app.route("/rmItem", methods=['GET', 'POST'])
-def remove_item():
-    content = request.get_json()
-    id = content.get('id')
-    invoice_id = content.get('invoice_id')
-    db_to_objects.remove_item(id)
-    newItemsList = db_to_objects.get_invoice_items(invoice_id)
-    return jsonify(newItemsList)
 
 
 if __name__ == '__main__':

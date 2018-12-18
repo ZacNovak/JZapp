@@ -117,6 +117,8 @@ button:hover{
 
 .await{
     color: white;
+    margin-left: 40px;
+    font-size: 35px;
 }
 
 .newClientForm{
@@ -207,4 +209,9 @@ button:hover{
     background-color:gray;
     font-size: 16px; 
     color: white;   
+}
+
+.clientName{
+    text-align: center;
+    padding-left: 110px;
 }
