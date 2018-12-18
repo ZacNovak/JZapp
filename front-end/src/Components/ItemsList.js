@@ -9,7 +9,7 @@ class ItemsList extends Component {
                 <div>
                     <ListOfItems itemsList={this.props.itemsToShow}/>
                     <AddNewClient 
-                    updateItemsList={this.props.updateItemsList}
+                    updateItemsList={this.props.updateItemList}
                     invoiceId={this.props.invoiceId}
                     />
                 </div>

@@ -45,7 +45,7 @@ class AddNewItem extends Component {
                 body: JSON.stringify(data)
             })
             .then(response => response.json())
-            .then(this.updateItemsList)
+            .then(this.updateItemList)
         
         console.log(data);
         

@@ -108,8 +108,33 @@ class App extends Component {
             .then(data => this.setState({invoicesToShow:data}))
   }
 
+  removeItem = (e) => {
+    console.log(e.currentTarget.id);
+
+    let data = {
+      id: e.currentTarget.id,
+      invoice_id: this.state.invoiceId
+    };
+
+    fetch('http://localhost:5000/rmItem', {
+      method: 'post',
+      headers: {'Content-type':'application/json'},
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => this.setState({itemsToShow:data}))
+  }
+
   updateItemList = () => {
-    console.log('dummy message from updateItemList')
+    fetch('http://localhost:5000/invoices', {
+                method: 'post',
+                headers: {'Content-type':'application/json'},
+                body: JSON.stringify({
+                    id: this.state.invoiceId,
+                })
+            })
+            .then(response => response.json())
+            .then(data => this.setState({itemsToShow:data}))
   }
 
   render() {
@@ -148,6 +173,7 @@ class App extends Component {
                   <ItemsList itemsToShow={this.state.itemsToShow}
                     updateItemList={this.updateItemList}
                     invoiceId={this.state.invoiceId}
+                    removeItem={this.removeItem}
                   />
                 </div>
             </div>
