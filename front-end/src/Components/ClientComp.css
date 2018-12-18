@@ -7,6 +7,7 @@ button {
     border-radius: 10px;
     background-color: rgb(56, 189, 233);
     font-size: 16px;
+    margin-right:5px;
 }
 
 button:hover{
@@ -205,6 +206,7 @@ button:hover{
 
   .submit {
     float: right;
+    display:block;
     border-radius: 10px;
     background-color:gray;
     font-size: 16px; 
@@ -215,3 +217,48 @@ button:hover{
     text-align: center;
     padding-left: 110px;
 }
+
+.form{
+    vertical-align: middle;
+
+}
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  #modal {
+    position: fixed;
+    display: block;
+    width: 20%;
+    height: 10%;
+    padding: 25px 0px 0px 0px;
+    
+    top: 45%;
+    left: 40%;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(180, 180, 180, 1);
+    z-index: 2;
+    cursor: pointer;
+  }
+  
+  #text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+  }
