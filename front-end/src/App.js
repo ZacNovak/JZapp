@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css'; 
 import ClientList from './Components/ClientsList.js';
 import InvoicesList from './Components/InvoicesList.js';
 import ItemsList from './Components/ItemsList';
-import AddNewClient from './Components/AddNewClient';
 
 class App extends Component {
   constructor() {

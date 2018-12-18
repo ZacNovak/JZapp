@@ -82,7 +82,7 @@ function SingleClient(props) {
         <div>
             <div >
                 <div className={classType} id={props.id} onClick={props.onClient}>
-                    <h2>{props.name}</h2>
+                    <h2 className = "clientName">{props.name}</h2>
                     <button id={props.id} onClick={props.rmFunc}>X</button>
                     <UpdateClient id={props.id} updateClients={props.updateclients}/>
                 </div>
