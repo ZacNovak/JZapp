@@ -50,15 +50,21 @@ class AddNewInvoice extends Component {
         return (
             <form onSubmit={this.handleSubmit} className="newInvoiceForm" >
             <h3>Add new Invoice: </h3>
-            <label>
+            <label className = "addInvoice">
                 Date: 
-                <input type="text" value={this.state.date} onChange={this.handleDateChange}/>
+                <input type="date" value={this.state.date} onChange={this.handleDateChange}/>
                 <br/>
+                
                 Location:
-                <input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
+                <select name="location" form="location">
+                    <option value="North">North</option>
+                    <option value="East">East</option>
+                    <option value="South">South</option>
+                    <option value="West">West</option>
+                </select>
             </label>
             <br/>
-            <input type="submit" value="Submit" />
+            <input classname = "submitButton" type="submit" value="Submit" />
             </form>
         );
     }

@@ -53,16 +53,19 @@ class AddNewItem extends Component {
     
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="newClientForm" >
+            <form onSubmit={this.handleSubmit} className="newItemForm" >
             <h3>Add new Item:</h3>
             <label>
                 Item:
                 <input type="text" value={this.state.name} onChange={this.handleNameChange}/>
+                <br/>
                 Price:
                 <input type="float" value={this.state.price} onChange={this.handlePriceChange}/>
+                <br/>
                 Quantity:
                 <input type="int" value={this.state.quantity} onChange={this.handleQuantityChange}/>
             </label>
+            <br/>
             <input type="submit" value="Submit" />
             </form>
         );

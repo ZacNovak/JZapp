@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './ClientComp.css';
-import UpdateClient from './UpdateClient.js';
 import AddNewClient from './AddNewClient';
+import ClientSummary from './ClientSummary';
+
 
 
 
@@ -16,6 +17,7 @@ class ClientComp extends Component {
 
     
     render() {
+        
         if (this.props.clientsToShow) {
             return (
                 <div>
@@ -26,7 +28,8 @@ class ClientComp extends Component {
                     clientId={this.props.clientId}
                     on={this.props.on}
                     />
-                    <AddNewClient updateclients={this.props.updateclients}/>
+                    <AddNewClient updateClientsAdd={this.props.updateClientsAdd}/>
+                    <ClientSummary clientList = {this.props.clientsToShow}/>
                     
                 </div>
             );
@@ -42,11 +45,26 @@ class ClientComp extends Component {
 
 // -------------------------------------------------------------- //
 
-function ListOfClients(props) {
+class ListOfClients extends Component {
+    constructor(props){
+        super(props);
+        this.state = { 
+            updateId: ""
+        };
+    }
+
+    on = (e) => {
+        if (!e) var e = window.event;
+        e.cancelBubble = true;
+        if (e.stopPropagation) e.stopPropagation();
+        console.log(e.target.id);
+        this.setState({updateId: e.target.id});
+        document.getElementById("overlay").style.display = "block";
+    }
     
-    if (props.clientList) {
-        let clientArr = props.clientList;
-        let clientCount = clientArr.length
+    render(){
+    if (this.props.clientList) {
+        let clientArr = this.props.clientList;
         clientArr.sort(function(a, b) { 
             return a.idnum - b.idnum;
           });
@@ -54,13 +72,12 @@ function ListOfClients(props) {
             <SingleClient key={clientArr[i].idnum} 
             id={clientArr[i].idnum} 
             name={clientArr[i].name}
-            onClient={props.onClient}
-            rmFunc={props.rmFunc}
-            updateclients={props.updateclients}
-            clientId={props.clientId}
-            openForm={props.openForm}
-            closeForm={props.closeForm}
-            on={props.on}
+            onClient={this.props.onClient}
+            rmFunc={this.props.rmFunc}
+            updateclients={this.props.updateclients}
+            clientId={this.props.clientId}
+            on={this.on}
+            updateId={this.state.updateId}
             />,            
         );
         return (
@@ -69,29 +86,22 @@ function ListOfClients(props) {
     } else {
         return <p> No clients to show </p>
     }
+    }
 }
 
 class SingleClient extends Component {
     constructor(props){
         super(props);
         this.state = {
-            name: " ",
+            name: " "
         };
         this.updateClients = this.props.updateclients;
         this.id = this.props.id;
+        this.updateId=this.props.updateId;
     }
     
-    on = (event) => {
-        if (!e) var e = window.event;
-        e.cancelBubble = true;
-        if (e.stopPropagation) e.stopPropagation();
-        document.getElementById("overlay").style.display = "block";
-        event.preventDefault();
-        
-
-    }
       
-    off = (event) => {
+    off = (e) => {
         document.getElementById("overlay").style.display = "none";
 
     }
@@ -101,11 +111,11 @@ class SingleClient extends Component {
     }
     
     handleSubmit = (event) => {
-        console.log('A name was submitted: ' + this.state.name +'with an id of ' + this.id);
+        console.log('A name was submitted: ' + this.state.name +'with an id of ' + this.props.updateId);
         event.preventDefault();
 
         let data = {
-            id: this.id,
+            id: this.props.updateId,
             name:this.state.name
         }
  
@@ -117,6 +127,7 @@ class SingleClient extends Component {
             .then(response => response.json())
             .then(this.updateClients)
             .then(this.off)
+            .then(this.setState({name: ""}))
     }
 
     
@@ -134,32 +145,33 @@ class SingleClient extends Component {
 
 
 
+
     return(
         
         <div>
             <div>
-                <div className={classType} id={this.props.id} onClick={this.props.onClient}>
-                    <h2 className = "clientName">{this.props.name}</h2>
-                    <button onClick={this.props.on}>Edit</button>
-                    <div id="overlay" >
-                        <div id="modal">
-                            <h1>Update Client</h1>
-                            <br/>
-                            <br/>
-                            <div className="form">
-                                <form onSubmit={this.handleSubmit}>
-                                    <label>
-                                        Name:
-                                        <input type="text" value={this.state.name} onChange={this.handleChange}/>
-                                        </label>
-                                    <input className="button" type="submit" value="Submit" />
-                                </form>
-                                <button onClick={this.off}>Exit</button>
 
-                            </div>
+                <div className={classType} id={this.props.id} value={this.props.name} onClick={this.props.onClient}>
+                    <h2 className = "clientName">{this.props.name}</h2>
+                    <button id={this.props.id} onClick={this.props.rmFunc}>X</button>
+                    <button id={this.props.id} onClick={this.props.on}>Edit</button>
+                   
+                </div>
+                <div id ="overlay">
+                    <div className="modal">
+                        <h1>Update Client</h1>
+                        
+                        <div className="form">
+                            <form id={this.props.id} onSubmit={this.handleSubmit}>
+                                <label>
+                                    Name:
+                                    <input type="text" value={this.state.name} onChange={this.handleChange}/>
+                                    </label>
+                                <input className="button" type="submit" value="Submit" />
+                            </form>
+                            <button onClick={this.off}>Exit</button>
                         </div>
                     </div>
-                    <button id={this.props.id} onClick={this.props.rmFunc}>X</button>
                 </div>
             </div>
         </div>

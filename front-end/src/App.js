@@ -12,13 +12,16 @@ class App extends Component {
       itemsToShow: null,
       clientsToShow: null,
       clientId: null,
-      invoiceId: null
+      clientName: null,
+      invoiceId: null,
+      clientLength: null
     }
   }
   
   onClient = (e) => {
     this.setState({itemsToShow:null});
     this.setState({clientId: e.currentTarget.id});
+    this.setState({clientName: e.target.getElementsByClassName('clientName')[0].textContent})
     fetch('http://localhost:5000/clients', {
                 method: 'post',
                 headers: {'Content-type':'application/json'},
@@ -64,10 +67,25 @@ class App extends Component {
 
 
   updateClientList = () => {
+    // this.setState({invoicesToShow:null});
+    // this.setState({clientId: null});
+
     fetch('http://localhost:5000/all_clients')
     .then(response=> response.json())
-    .then(data => this.setState({clientsToShow:data}));
+    .then(data => this.setState({clientsToShow:data}))
+    
   }
+
+  updateClientListAdd = () => {
+    this.setState({invoicesToShow:null});
+    this.setState({clientId: null});
+
+    fetch('http://localhost:5000/all_clients')
+    .then(response=> response.json())
+    .then(data => this.setState({clientsToShow:data}))
+    
+  }
+
 
   removeClient = (e) => {
     this.setState({invoicesToShow:null});
@@ -108,13 +126,7 @@ class App extends Component {
             .then(data => this.setState({invoicesToShow:data}))
   }
 
-  on = (e) => {
-    if (!e) var e = window.event;
-    e.cancelBubble = true;
-    if (e.stopPropagation) e.stopPropagation();
-    document.getElementById("overlay").style.display = "block";
-    e.preventDefault();
-  }
+
 
   removeItem = (e) => {
     console.log(e.currentTarget.id);
@@ -162,8 +174,8 @@ class App extends Component {
                   onClient={this.onClient}
                   rmFunc={this.removeClient}
                   updateclients={this.updateClientList}
+                  updateClientsAdd={this.updateClientListAdd}
                   clientId={this.state.clientId}
-                  on={this.on}
                   />
                 </div>
                 <div className="col-4">
@@ -175,6 +187,8 @@ class App extends Component {
                   clientId={this.state.clientId}
                   rmInvoice={this.removeInvoice}
                   invoiceId={this.state.invoiceId}
+                  clientName={this.state.clientName}
+
                   />
                 </div>
                 <div className="col-4">
@@ -183,8 +197,10 @@ class App extends Component {
                     updateItemList={this.updateItemList}
                     invoiceId={this.state.invoiceId}
                     removeItem={this.removeItem}
+                    clientId={this.state.clientId}
                   />
                 </div>
+               
             </div>
         </div>
       </div>

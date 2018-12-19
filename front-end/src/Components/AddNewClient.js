@@ -8,7 +8,7 @@ class AddNewClient extends Component {
         this.state = {
             name: " ",
         };
-        this.updateClients = this.props.updateclients;
+        this.updateClientsAdd = this.props.updateClientsAdd;
     }
 
     handleChange = (event) => {
@@ -29,7 +29,8 @@ class AddNewClient extends Component {
                 body: JSON.stringify(data)
             })
             .then(response => response.json())
-            .then(this.updateClients)
+            .then(this.updateClientsAdd)
+            .then(this.setState({name: ""}))
         
     }
     

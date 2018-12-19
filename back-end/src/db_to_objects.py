@@ -181,6 +181,17 @@ def remove_invoice(idnum):
     cur.close()
     conn.close()
 
+def update_invoice(id, date, location, client_id):
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+
+    cur.execute(f"Update invoices Set date='{date}', location='{location}', client_id='{client_id}' where id = {id};")
+    conn.commit()
+
+    cur.close()
+    conn.close()    
+
+
 class Items:
     def __init__(self,itemTuple):
         self.id, self.name, self.invoice_id, self.price, self.gst, self.quantity = itemTuple

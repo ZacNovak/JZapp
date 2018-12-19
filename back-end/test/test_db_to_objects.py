@@ -84,6 +84,15 @@ class TestDBObjects(unittest.TestCase):
         db_to_objects.update_client(testID,'Margo')
         self.assertEqual({'idnum':1, 'name':'Margo'}, db_to_objects.get_client(1))
 
+    def test_update_invoice(self):
+        testInvoiceID = db_to_objects.get_invoiceId_by_location('Test2')
+        test_date = datetime.date(1990, 1, 1)
+        test_location = "Test3"
+        test_client_id = 51
+        db_to_objects.update_invoice(testInvoiceID,test_date, test_location, test_client_id)
+        test_invoice_id = db_to_objects.get_invoiceId_by_location("Test3")
+        self.assertEqual({'id':test_invoice_id, 'date':test_date, 'location':test_location, "client_id":test_client_id}, db_to_objects.get_invoice(test_invoice_id))
+
     def test_get_itemid_by_name(self):
         self.assertEqual(db_to_objects.get_itemid_by_name('Bagel'),9)
         self.assertEqual(db_to_objects.get_itemid_by_name('Funk'),'Item does not exist')

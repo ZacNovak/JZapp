@@ -14,6 +14,7 @@ button:hover{
     background-color: rgb(255, 65, 97);
 }
 
+
 .clientCard{
     background-color: lightblue;
     border: black;
@@ -63,11 +64,12 @@ button:hover{
     border: black;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 90%;
-    font-size: 10px;
+    margin-left: 10px;
+    font-size: 11px;
     border-radius: 5px;
     height: 50px;
     padding: 2% 0;
-    text-align: center;
+    text-align: left;
     margin-top: 5px;
     margin-bottom: 5px;
     line-height: 5px;
@@ -85,16 +87,22 @@ button:hover{
     border: black;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 90%;
-    font-size: 10px;
+    margin-left: 10px;
+    font-size: 11px;
     border-radius: 5px;
     height: 50px;
     padding: 2% 0;
-    text-align: center;
+    text-align: left;
     margin-top: 5px;
     margin-bottom: 5px;
     line-height: 5px;
     position: relative;
     box-shadow: 5px 5px 15px black;
+
+}
+
+.invoicesText{
+    margin-left: 20px;
 
 }
 
@@ -129,7 +137,7 @@ button:hover{
     width: 70%;
     font-size: 16px;
     border-radius: 5px;
-    height: 100px;
+    height: 60px;
     padding: 2% 0;
     text-align: center;
     margin-top: 0px;
@@ -149,18 +157,39 @@ button:hover{
     width: 70%;
     font-size: 16px;
     border-radius: 5px;
-    height: 100px;
+    height: 120px;
     padding: 2% 0;
     text-align: center;
     margin-top: 0px;
     margin-bottom: 5px;
     margin-left: 15%;
     vertical-align: middle;
-    line-height: 5px;
+    line-height: 3px;
     position: relative;
     box-shadow: 5px 5px 15px black;
 
 }
+
+.newItemForm{
+    background-color: lightgreen;
+    border: black;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 70%;
+    font-size: 16px;
+    border-radius: 5px;
+    height: 120px;
+    padding: 2% 0;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    margin-left: 15%;
+    vertical-align: middle;
+    line-height: 3px;
+    position: relative;
+    box-shadow: 5px 5px 15px black;
+
+}
+
 
 .modal {
     font-size: 12px;
@@ -214,13 +243,50 @@ button:hover{
 }
 
 .clientName{
-    text-align: center;
-    padding-left: 110px;
+    text-align: left;
+    margin-left: 5%;
+    float: left;
+    position: relative;
 }
 
 .form{
     vertical-align: middle;
+}
 
+.shopper{
+    margin-top:3%;
+    height: 80%;
+    display: block;
+    float: left;
+    position: relative;
+    width: 34%;
+
+}
+
+.clientSummaryText{
+    position: relative;
+    width: 64%;
+    height: 80%;
+    line-height: 1em;
+}
+
+.clientSummary{
+    background-color: white;
+    display: block;
+    border: black;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 70%;
+    font-size: 16px;
+    border-radius: 5px;
+    height: 100px;
+    padding: 0 0;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    margin-left: 15%;
+    line-height: 3px;
+    position: relative;
+    box-shadow: 5px 5px 15px black;   
 }
 
 #overlay {
@@ -237,15 +303,45 @@ button:hover{
     cursor: pointer;
   }
 
-  #modal {
+  .modal {
     position: fixed;
     display: block;
-    width: 20%;
-    height: 10%;
-    padding: 25px 0px 0px 0px;
-    
+    width: 40%;
+    height: 12%;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
     top: 45%;
-    left: 40%;
+    left: 30%;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(180, 180, 180, 1);
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  #overlay-invoices {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0%;
+    left: 0%;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+  }
+
+  .modal-invoices {
+    position: fixed;
+    display: block;
+    width: 40%;
+    height: 18%;
+    padding: 0px 0px 0px 0px;
+    text-align: center;
+    top: 45%;
+    left: 30%;
     right: 0;
     bottom: 0;
     background-color: rgba(180, 180, 180, 1);

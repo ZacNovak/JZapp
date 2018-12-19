@@ -62,6 +62,17 @@ def add_new_invoice():
     newInvoiceList = db_to_objects.get_client_invoices(client_id)
     return jsonify(newInvoiceList)
 
+@app.route("/updateInvoice", methods=['PUT'])
+def update_invoice():
+    content = request.get_json()
+    client_id = content.get('client_id')
+    date = content.get('date')
+    id = content.get('id')
+    location = content.get('location')
+    db_to_objects.update_invoice(id, date, location, client_id)
+    newInvoiceList = db_to_objects.get_client_invoices(client_id)
+    return jsonify(newInvoiceList)
+
 @app.route("/rmInvoice", methods=['GET', 'POST'])
 def remove_invoice():
     content = request.get_json()

@@ -17,13 +17,18 @@ class ItemsList extends Component {
                     />
                 </div>
             );
-        } else {
+        } else if (this.props.clientId) {
             return(
                 <div>
                     <h3 className="await">Please select an invoice </h3>
                 </div>
             );
-        }
+        } else {
+            return(
+                <div></div>
+            );
+        } 
+        
     }
 }
 
@@ -54,7 +59,7 @@ function SingleItem(props) {
         <div>
             <div className='itemCard' id={props.id}>
                 <h2>{props.name}</h2> <br></br>
-                <h2>Quantity: {props.quantity}, Price: {props.price}</h2> 
+                <h2>Quantity: {props.quantity}, Price: ${props.price}</h2> 
                 <button id={props.id} onClick={props.removeItem}>x</button>
             </div>
         </div>
