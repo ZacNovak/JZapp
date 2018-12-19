@@ -152,9 +152,13 @@ class SingleClient extends Component {
             <div>
 
                 <div className={classType} id={this.props.id} value={this.props.name} onClick={this.props.onClient}>
-                    <h2 className = "clientName">{this.props.name}</h2>
-                    <button id={this.props.id} onClick={this.props.rmFunc}>X</button>
-                    <button id={this.props.id} onClick={this.props.on}>Edit</button>
+                    <div>
+                        <h2 className = "clientName">{this.props.name}</h2>
+                    </div>
+                    <div className="clientButtons">
+                        <button className="clientCard-button" id={this.props.id} onClick={this.props.rmFunc}>X</button>
+                        <button className="clientCard-button"id={this.props.id} onClick={this.props.on}>Edit</button>
+                    </div>
                    
                 </div>
                 <div id ="overlay">
