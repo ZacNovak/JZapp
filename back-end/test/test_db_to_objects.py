@@ -33,8 +33,8 @@ class TestDBObjects(unittest.TestCase):
         self.assertEqual(2,test_item.quantity)
 
     def test_get_invoice_items(self):
-        firstItem = {'id':5,'name':'Tea','invoice_id':3,'price':2.75,'gst':0.1375,'quantity':1}
-        secondItem = {'id':33,'name':'Gatorade','invoice_id':3,'price':2.5,'gst':0.125,'quantity':9}
+        firstItem = {'id':5,'name':'Tea','invoice_id':3,'price':"$2.75",'gst':"$0.14",'quantity':1}
+        secondItem = {'id':33,'name':'Gatorade','invoice_id':3,'price':"$2.50",'gst':'$0.13','quantity':9}
         self.assertEqual([firstItem,secondItem], db_to_objects.get_invoice_items(3))
 
     def test_get_client(self):
@@ -108,3 +108,13 @@ class TestDBObjects(unittest.TestCase):
         db_to_objects.remove_item(testid)
         self.assertEqual(db_to_objects.get_item(testid),'Item does not exist')
         
+    def test_update_item(self):
+        testItemID = db_to_objects.get_itemid_by_name('Apple')
+        testname = 'Apple2'
+        testinvoiceid = 35
+        testprice = 10.00
+        testgst = 0.50
+        testquantity = 5
+        db_to_objects.update_item(testItemID, testname, testinvoiceid, testprice, testgst, testquantity)
+        test_item_id = db_to_objects.get_itemid_by_name("Apple2")
+        self.assertEqual({'id':testItemID, 'name':testname, 'invoice_id':testinvoiceid, 'price':"$10.00", 'gst': "$0.50", 'quantity':testquantity}, db_to_objects.get_item(test_item_id))

@@ -94,6 +94,20 @@ def add_new_item():
     newItemsList = db_to_objects.get_invoice_items(invoice_id)
     return jsonify(newItemsList)
 
+
+@app.route("/updateItem", methods=['PUT'])
+def update_item():
+    content = request.get_json()
+    id = content.get('id')
+    invoice_id = content.get('invoice_id')
+    price = content.get('price')
+    gst = content.get('gst')
+    name = content.get('name')
+    quantity = content.get('quantity')
+    db_to_objects.update_item(id, name, invoice_id, price, gst, quantity)
+    newItemsList = db_to_objects.get_invoice_items(invoice_id)
+    return jsonify(newItemsList)
+
 @app.route("/rmItem", methods=['GET', 'POST'])
 def remove_item():
     content = request.get_json()
@@ -102,6 +116,8 @@ def remove_item():
     db_to_objects.remove_item(id)
     newItemsList = db_to_objects.get_invoice_items(invoice_id)
     return jsonify(newItemsList)
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

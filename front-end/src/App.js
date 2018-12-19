@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   onInvoice = (e) => {
-    //console.log(e.currentTarget.id);
+    console.log(e.currentTarget.id);
     this.setState({invoiceId: e.currentTarget.id})
     fetch('http://localhost:5000/invoices', {
                 method: 'post',
@@ -65,6 +65,21 @@ class App extends Component {
             .then(data => this.setState({invoicesToShow:data}))
   }
 
+  updateInvoiceListAdd = () => {
+    this.setState({itemsToShow:null});
+    this.setState({invoiceId: null});
+    fetch('http://localhost:5000/clients', {
+                method: 'post',
+                headers: {'Content-type':'application/json'},
+                body: JSON.stringify({
+                    id: this.state.clientId,
+                })
+            })
+            .then(response => response.json())
+            .then(data => this.setState({invoicesToShow:data}))
+  }
+
+
 
   updateClientList = () => {
     // this.setState({invoicesToShow:null});
@@ -79,11 +94,11 @@ class App extends Component {
   updateClientListAdd = () => {
     this.setState({invoicesToShow:null});
     this.setState({clientId: null});
+    this.setState({itemsToShow: null})
 
     fetch('http://localhost:5000/all_clients')
     .then(response=> response.json())
     .then(data => this.setState({clientsToShow:data}))
-    
   }
 
 
@@ -184,6 +199,7 @@ class App extends Component {
                   invoicesToShow={this.state.invoicesToShow} 
                   onInvoice={this.onInvoice} 
                   updateInvoiceList={this.updateInvoiceList} 
+                  updateInvoiceListAdd={this.updateInvoiceListAdd} 
                   clientId={this.state.clientId}
                   rmInvoice={this.removeInvoice}
                   invoiceId={this.state.invoiceId}
@@ -198,6 +214,8 @@ class App extends Component {
                     invoiceId={this.state.invoiceId}
                     removeItem={this.removeItem}
                     clientId={this.state.clientId}
+                    clientName={this.state.clientName}
+
                   />
                 </div>
                

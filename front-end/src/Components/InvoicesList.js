@@ -23,7 +23,8 @@ class InvoicesList extends Component {
                     clientId={this.props.clientId}
                     />
                     <AddNewInvoice clientId={this.props.clientId} 
-                    updateInvoiceList={this.props.updateInvoiceList} />
+                    updateInvoiceListAdd={this.props.updateInvoiceListAdd} 
+                    />
                     <InvoiceSummary invoiceList = {this.props.invoicesToShow}
                     clientName={this.props.clientName}
                     />
@@ -64,7 +65,7 @@ class ListOfInvoices extends Component{
     render(){
     if (this.props.invoiceList) {
         let invoiceArr = this.props.invoiceList;
-        console.log(invoiceArr)
+        // console.log(invoiceArr)
         invoiceArr.sort(function(a, b) { 
             let adate = new Date(a.date);
             let bdate = new Date(b.date);

@@ -271,3 +271,14 @@ def get_item(id):
     conn.close()
 
     return ItemObj.__dict__
+
+def update_item(id, name, invoiceid, price, gst, quantity):
+    
+    conn = psycopg2.connect("dbname=evolveu")
+    cur = conn.cursor()
+
+    cur.execute(f"Update items Set name='{name}', invoice_id='{invoiceid}', price='{price}', gst='{gst}', quantity='{quantity}' where id = {id};")
+    conn.commit()
+
+    cur.close()
+    conn.close() 

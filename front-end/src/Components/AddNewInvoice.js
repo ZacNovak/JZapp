@@ -9,7 +9,7 @@ class AddNewInvoice extends Component {
             date: " ",
             location:" "
         };
-        this.updateInvoiceList = this.props.updateInvoiceList;
+        this.updateInvoiceListAdd = this.props.updateInvoiceListAdd;
     }
 
     handleDateChange = (event) => {
@@ -42,7 +42,9 @@ class AddNewInvoice extends Component {
                 body: JSON.stringify(data)
             })
             .then(response => response.json())
-            .then(this.updateInvoiceList)
+            .then(this.updateInvoiceListAdd)
+            .then(this.setState({date: ""}))
+            .then(this.setState({location: ""}))
         
     }
     
@@ -56,12 +58,7 @@ class AddNewInvoice extends Component {
                 <br/>
                 
                 Location:
-                <select name="location" form="location">
-                    <option value="North">North</option>
-                    <option value="East">East</option>
-                    <option value="South">South</option>
-                    <option value="West">West</option>
-                </select>
+                <input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
             </label>
             <br/>
             <input classname = "submitButton" type="submit" value="Submit" />

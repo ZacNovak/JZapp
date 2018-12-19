@@ -46,8 +46,11 @@ class AddNewItem extends Component {
             })
             .then(response => response.json())
             .then(this.updateItemList)
+            .then(this.setState({name: ""}))
+            .then(this.setState({price: ""}))
+            .then(this.setState({quantity: ""}))
+
         
-        console.log(data);
         
     }
     
