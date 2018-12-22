@@ -138,9 +138,9 @@ class SingleClient extends Component {
     let clientId = this.props.clientId;
 
     if(parseInt(id) === parseInt(clientId)){    
-        classType = "clientCardSelected"
+        classType = "card clientCard cardSelected"
      } else {
-        classType = "clientCard"
+        classType = "card clientCard"
     }
 
 
@@ -155,11 +155,10 @@ class SingleClient extends Component {
                     <div>
                         <h2 className = "clientName">{this.props.name}</h2>
                     </div>
-                    <div className="clientButtons">
-                        <button className="clientCard-button" id={this.props.id} onClick={this.props.rmFunc}>X</button>
-                        <button className="clientCard-button"id={this.props.id} onClick={this.props.on}>Edit</button>
+                    <div className="cardButtons">
+                        <button id={this.props.id} onClick={this.props.rmFunc}>X</button>
+                        <button id={this.props.id} onClick={this.props.on}>Edit</button>
                     </div>
-                   
                 </div>
                 <div id ="overlay">
                     <div className="modal">

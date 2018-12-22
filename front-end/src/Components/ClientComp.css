@@ -10,93 +10,50 @@ button {
     margin-right:5px;
 }
 
-.clientCard-button {
-    float: right;
-    border-radius: 10px;
-    background-color: rgb(56, 189, 233);
-    font-size: 16px;
-    margin-right:5px;
-    display: flex;
-    justify-content: flex-end;
-}
-
 button:hover{
     background-color: rgb(255, 65, 97);
 }
 
-.clientButtons{
+
+.card{
+    background-color: lightblue;
+    border: black;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 90%;
+    border-radius: 5px;
+    padding: 2% 0;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    line-height: 5px;
+    font-size: 16px;
+    position: relative;
+    box-shadow: 5px 5px 15px black;
+    display: flex;
+    align-items: center;
+}
+
+
+.cardButtons{
     justify-content: stretch;
     margin-left: auto;
     order: 2;
 }
 
+.card:hover{
+    background-color: pink;
+}
+
+.cardSelected{
+    background-color: pink;
+}
 
 .clientCard{
-    background-color: lightblue;
-    border: black;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 90%;
-    font-size: 16px;
-    border-radius: 5px;
     height: 30px;
-    padding: 2% 0;
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    line-height: 5px;
-    position: relative;
-    box-shadow: 5px 5px 15px black;
-    display: flex;
-    align-items: center;
-
-    
-    
 }
-
-.clientCard:hover{
-    background-color: pink;
-}
-
-.clientCardSelected{
-    background-color: pink;
-    border: black;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 90%;
-    font-size: 16px;
-    border-radius: 5px;
-    height: 30px;
-    padding: 2% 0;
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    line-height: 5px;
-    position: relative;
-    box-shadow: 5px 5px 15px black;
-    display: flex;
-    align-items: center;
-
-    
-}
-
-
 
 .invoiceCard{
-    background-color: lightblue;
-    border: black;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 90%;
-    margin-left: 10px;
-    font-size: 10px;
-    border-radius: 5px;
-    height: 50px;
-    padding: 2% 0;
+    height: 60px;
     text-align: left;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    line-height: 5px;
-    position: relative;
-    box-shadow: 5px 5px 15px black;
-
 }
 
 .invoiceCard:hover{
@@ -118,13 +75,12 @@ button:hover{
     margin-bottom: 5px;
     line-height: 5px;
     position: relative;
-    box-shadow: 5px 5px 15px black;
 
 }
 
 .invoicesText{
     margin-left: 20px;
-
+    line-height: 20px;
 }
 
 .itemCard{
@@ -270,7 +226,7 @@ button:hover{
 
 .clientName{
     text-align: left;
-    margin-left: 5%;
+    margin-left: 20px;
     position: relative;
     display: flex;
     justify-items: flex-start;

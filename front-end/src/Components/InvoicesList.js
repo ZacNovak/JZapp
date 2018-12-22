@@ -153,19 +153,23 @@ class SingleInvoice extends Component {
     let invoiceId = this.props.invoiceId;
 
     if(parseInt(id) === parseInt(invoiceId)){    
-        classType = "invoiceCardSelected"
+        classType = "card invoiceCard cardSelected"
      } else {
-        classType = "invoiceCard"
+        classType = "card invoiceCard"
     }
 
         
     return(
         <div>
             <div className={classType} id={this.props.id} onClick={this.props.onInvoice}>
-                <h2 className="invoicesText">Date: {date}</h2><br/>
-                <h2 className="invoicesText">Location: {this.props.location}</h2>
-                <button id={this.props.id} onClick={this.props.rmInvoice}>X</button>
-                <button id={this.props.id} onClick={this.props.on}>Edit</button>  
+                <p className="invoicesText">
+                    Date: {date} <br/> 
+                    Location: {this.props.location} 
+                </p>
+                <div className="cardButtons">
+                    <button id={this.props.id} onClick={this.props.rmInvoice}>X</button>
+                    <button id={this.props.id} onClick={this.props.on}>Edit</button>  
+                </div>
             </div>
             <div id ="overlay-invoices">
                 <div className="modal-invoices">
