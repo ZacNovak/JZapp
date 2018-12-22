@@ -159,11 +159,15 @@ class SingleItem extends Component {
     render(){
     return(
         <div>
-            <div className='itemCard' id={this.props.id}>
-                <h2 className="invoicesText">{this.props.name}</h2> <br></br>
-                <h2 className="invoicesText">Quantity: {this.props.quantity}, Price: {this.props.price}</h2> 
-                <button id={this.props.id} onClick={this.props.removeItem}>x</button>
-                <button id={this.props.id} onClick={this.props.on}>Edit</button>  
+            <div className='card invoiceCard' id={this.props.id}>
+                <p className="invoicesText">
+                <strong>{this.props.name}</strong> <br></br>
+                Quantity: {this.props.quantity} <br></br>
+                Price: {this.props.price}</p> 
+                <div className="cardButtons">
+                    <button id={this.props.id} onClick={this.props.removeItem}>x</button>
+                    <button id={this.props.id} onClick={this.props.on}>Edit</button>  
+                </div>
             </div>
             <div id ="overlay-items">
                 <div className="modal-items">

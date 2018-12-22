@@ -50,18 +50,17 @@ class AddNewInvoice extends Component {
     
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="newInvoiceForm" >
+            <form onSubmit={this.handleSubmit} className="formStyle invoiceForm" >
             <h3>Add new Invoice: </h3>
-            <label className = "addInvoice">
+            <label>
                 Date: 
                 <input type="date" value={this.state.date} onChange={this.handleDateChange}/>
                 <br/>
-                
                 Location:
                 <input type="text" value={this.state.location} onChange={this.handleLocationChange}/>
             </label>
             <br/>
-            <input classname = "submitButton" type="submit" value="Submit" />
+            <input type="submit" value="Submit" />
             </form>
         );
     }

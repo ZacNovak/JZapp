@@ -17,7 +17,15 @@ class App extends Component {
       clientLength: null
     }
   }
+
+  // populate the client list from db when app first renders
+  componentDidMount() {
+    fetch('http://localhost:5000/all_clients')
+    .then(response=> response.json())
+    .then(data => this.setState({clientsToShow:data}));
+  }
   
+  // retrieve a client's list of invoices
   onClient = (e) => {
     this.setState({itemsToShow:null});
     this.setState({clientId: e.currentTarget.id});
@@ -33,6 +41,7 @@ class App extends Component {
             .then(data => this.setState({invoicesToShow:data}))
   }
 
+  // retrieve the items in a given invoice
   onInvoice = (e) => {
     console.log(e.currentTarget.id);
     this.setState({invoiceId: e.currentTarget.id})
@@ -47,12 +56,7 @@ class App extends Component {
             .then(data => this.setState({itemsToShow:data}))
   }
 
-  componentDidMount() {
-    fetch('http://localhost:5000/all_clients')
-    .then(response=> response.json())
-    .then(data => this.setState({clientsToShow:data}));
-  }
-
+  // update the invoice list after an invoice has been modified
   updateInvoiceList = () => {
     fetch('http://localhost:5000/clients', {
                 method: 'post',
@@ -65,6 +69,7 @@ class App extends Component {
             .then(data => this.setState({invoicesToShow:data}))
   }
 
+  // update the invoice list after a new invoice has been added
   updateInvoiceListAdd = () => {
     this.setState({itemsToShow:null});
     this.setState({invoiceId: null});
@@ -79,18 +84,15 @@ class App extends Component {
             .then(data => this.setState({invoicesToShow:data}))
   }
 
-
-
+  // update the client list after an client has been modified
   updateClientList = () => {
-    // this.setState({invoicesToShow:null});
-    // this.setState({clientId: null});
-
     fetch('http://localhost:5000/all_clients')
     .then(response=> response.json())
     .then(data => this.setState({clientsToShow:data}))
     
   }
 
+  // update the client list after a new client has been added
   updateClientListAdd = () => {
     this.setState({invoicesToShow:null});
     this.setState({clientId: null});
@@ -101,7 +103,20 @@ class App extends Component {
     .then(data => this.setState({clientsToShow:data}))
   }
 
+  // update the item list after an item has been modified or added
+  updateItemList = () => {
+    fetch('http://localhost:5000/invoices', {
+                method: 'post',
+                headers: {'Content-type':'application/json'},
+                body: JSON.stringify({
+                    id: this.state.invoiceId,
+                })
+            })
+            .then(response => response.json())
+            .then(data => this.setState({itemsToShow:data}))
+  }
 
+  // remove a client
   removeClient = (e) => {
     this.setState({invoicesToShow:null});
     if (!e) var e = window.event;
@@ -119,6 +134,7 @@ class App extends Component {
             .then(data => this.setState({clientsToShow:data}))
   }
 
+  // remove an invoice
   removeInvoice = (e) => {
     this.setState({itemsToShow:null});
     if (!e) var e = window.event;
@@ -141,8 +157,7 @@ class App extends Component {
             .then(data => this.setState({invoicesToShow:data}))
   }
 
-
-
+  // remove an item
   removeItem = (e) => {
     console.log(e.currentTarget.id);
 
@@ -160,27 +175,15 @@ class App extends Component {
     .then(data => this.setState({itemsToShow:data}))
   }
 
-  updateItemList = () => {
-    fetch('http://localhost:5000/invoices', {
-                method: 'post',
-                headers: {'Content-type':'application/json'},
-                body: JSON.stringify({
-                    id: this.state.invoiceId,
-                })
-            })
-            .then(response => response.json())
-            .then(data => this.setState({itemsToShow:data}))
-  }
-
   render() {
     return (
       <div>
         <div className="App">
           <header className="App-header">
             <h1> Welcome to JZ Store of Goodies</h1>
-            {/* <img src={logo} className="App-logo" alt="logo" /> */}
           </header>
         </div>
+
         <div className="background">
             <div className="flex-container">
                 <div className="col-4">
@@ -193,6 +196,7 @@ class App extends Component {
                   clientId={this.state.clientId}
                   />
                 </div>
+
                 <div className="col-4">
                   <h2 className="heading">Invoices</h2>
                   <InvoicesList 
@@ -204,9 +208,9 @@ class App extends Component {
                   rmInvoice={this.removeInvoice}
                   invoiceId={this.state.invoiceId}
                   clientName={this.state.clientName}
-
                   />
                 </div>
+
                 <div className="col-4">
                   <h2 className="heading">Items</h2>
                   <ItemsList itemsToShow={this.state.itemsToShow}
@@ -215,8 +219,7 @@ class App extends Component {
                     removeItem={this.removeItem}
                     clientId={this.state.clientId}
                     clientName={this.state.clientName}
-
-                  />
+                   />
                 </div>
                
             </div>

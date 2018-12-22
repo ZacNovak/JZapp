@@ -36,7 +36,7 @@ class AddNewClient extends Component {
     
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="newClientForm">
+            <form onSubmit={this.handleSubmit} className="formStyle clientForm">
             <h3>Add new client:</h3>
             <label>
                 Name:

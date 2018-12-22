@@ -60,50 +60,9 @@ button:hover{
     background-color: pink;
 }
 
-.invoiceCardSelected{
-    background-color: pink;
-    border: black;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 90%;
-    margin-left: 10px;
-    font-size: 10px;
-    border-radius: 5px;
-    height: 50px;
-    padding: 2% 0;
-    text-align: left;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    line-height: 5px;
-    position: relative;
-
-}
-
 .invoicesText{
     margin-left: 20px;
     line-height: 20px;
-}
-
-.itemCard{
-    background-color: lightblue;
-    border: black;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 90%;
-    margin-left: 10px;
-    font-size: 10px;
-    border-radius: 5px;
-    height: 50px;
-    padding: 2% 0;
-    text-align: left;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    line-height: 5px;
-    position: relative;
-    box-shadow: 5px 5px 15px black;
-
-}
-
-.itemCard:hover{
-    background-color: pink;
 }
 
 .await{
@@ -112,116 +71,92 @@ button:hover{
     font-size: 35px;
 }
 
-.newClientForm{
+.formStyle{
     background-color: lightgreen;
     border: black;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 70%;
     font-size: 16px;
     border-radius: 5px;
+    padding: 2% 0;
+    text-align: center;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    margin-left: 15%;
+    vertical-align: middle;
+    line-height: 3px;
+    position: relative;
+    box-shadow: 5px 5px 15px black;
+}
+
+.clientForm{
     height: 60px;
-    padding: 2% 0;
-    text-align: center;
-    margin-top: 0px;
-    margin-bottom: 5px;
-    margin-left: 15%;
-    vertical-align: middle;
-    line-height: 3px;
-    position: relative;
-    box-shadow: 5px 5px 15px black;
-
 }
 
-.newInvoiceForm{
-    background-color: lightgreen;
-    border: black;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 70%;
-    font-size: 16px;
-    border-radius: 5px;
+.invoiceForm{
     height: 120px;
-    padding: 2% 0;
-    text-align: center;
-    margin-top: 0px;
-    margin-bottom: 5px;
-    margin-left: 15%;
-    vertical-align: middle;
-    line-height: 3px;
-    position: relative;
-    box-shadow: 5px 5px 15px black;
-
 }
 
-.newItemForm{
-    background-color: lightgreen;
-    border: black;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 70%;
-    font-size: 16px;
-    border-radius: 5px;
+.itemForm{
     height: 120px;
-    padding: 2% 0;
-    text-align: center;
-    margin-top: 0px;
-    margin-bottom: 5px;
-    margin-left: 15%;
-    vertical-align: middle;
-    line-height: 3px;
-    position: relative;
-    box-shadow: 5px 5px 15px black;
-
 }
+
+
+/***********************************/
+/* overlay styling */
+/***********************************/
 
 
 .modal {
     font-size: 12px;
     width: 400px;
-  }
-  .modal > .header {
-    width: 400px;
-    border-bottom: 1px solid gray;
-    font-size: 24px;
-    text-align: center;
-    padding: 10px;
-  }
-  .modal > .content {
-    width: 400px;
-    padding: 10px 5px;
-    text-align: center;
+}
 
-  }
-  .modal > .actions {
-    width: 400px;
-    padding: 10px 5px;
-    margin: auto;
-    text-align: center;
-    
-  }
-  .modal > .close {
-    cursor: pointer;
-    position: absolute;
-    display: block;
-    padding: 2px 5px;
-    line-height: 20px;
-    right: -10px;
-    top: -10px;
-    font-size: 24px;
-    background: #ffffff;
-    border-radius: 18px;
-    border: 1px solid #cfcece;
-  }
+.modal > .header {
+width: 400px;
+border-bottom: 1px solid gray;
+font-size: 24px;
+text-align: center;
+padding: 10px;
+}
+.modal > .content {
+width: 400px;
+padding: 10px 5px;
+text-align: center;
 
-  .content {
-      font-size: 18px;
-  }
+}
+.modal > .actions {
+width: 400px;
+padding: 10px 5px;
+margin: auto;
+text-align: center;
 
-  .submit {
-    float: right;
-    display:block;
-    border-radius: 10px;
-    background-color:gray;
-    font-size: 16px; 
-    color: white;   
+}
+.modal > .close {
+cursor: pointer;
+position: absolute;
+display: block;
+padding: 2px 5px;
+line-height: 20px;
+right: -10px;
+top: -10px;
+font-size: 24px;
+background: #ffffff;
+border-radius: 18px;
+border: 1px solid #cfcece;
+}
+
+.content {
+    font-size: 18px;
+}
+
+.submit {
+float: right;
+display:block;
+border-radius: 10px;
+background-color:gray;
+font-size: 16px; 
+color: white;   
 }
 
 .clientName{

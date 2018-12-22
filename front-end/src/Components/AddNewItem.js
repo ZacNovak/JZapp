@@ -56,7 +56,7 @@ class AddNewItem extends Component {
     
     render() {
         return (
-            <form onSubmit={this.handleSubmit} className="newItemForm" >
+            <form onSubmit={this.handleSubmit} className="formStyle itemForm" >
             <h3>Add new Item:</h3>
             <label>
                 Item:
