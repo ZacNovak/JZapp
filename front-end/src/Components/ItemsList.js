@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AddNewItem from './AddNewItem';
 import ItemsSummary from './ItemsSummary.js';
-import './ClientComp.css';
+import './componentStyles.css';
 
 
 

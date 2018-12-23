@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './ClientComp.css';
+import './componentStyles.css';
 
 // Move this class from App to ItemsList component
 class AddNewItem extends Component {

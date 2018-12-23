@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './ClientComp.css';
+import './componentStyles.css';
 
 
 class AddNewInvoice extends Component {

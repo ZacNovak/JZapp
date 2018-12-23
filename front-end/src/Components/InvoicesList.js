@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
+import './componentStyles.css';
 import AddNewInvoice from './AddNewInvoice.js';
 import InvoiceSummary from './InvoiceSummary.js';
 
 
 
 class InvoicesList extends Component {
-    constructor(props){
-        super(props);
-        this.state = { 
-        };
-    }
 
     render() {
         if (this.props.invoicesToShow) {

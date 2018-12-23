@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-import './ClientComp.css';
+import './componentStyles.css';
 import image from './img/pay.png';
 
 
 
 class InvoiceSummary extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-        };
-       
-    }
-
-
     
     render(){
         let message = "not working"

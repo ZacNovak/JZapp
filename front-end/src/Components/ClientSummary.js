@@ -1,17 +1,10 @@
 import React, { Component } from 'react';
-import './ClientComp.css';
+import './componentStyles.css';
 import image from './img/man.png';
 
 
 
 class ClientSummary extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-        };
-       
-    }
-    
     render() {
         return (
             <div className="clientSummary">

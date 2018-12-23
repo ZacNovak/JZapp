@@ -102,6 +102,42 @@ button:hover{
 }
 
 
+.clientSummaryText{
+    position: relative;
+    width: 64%;
+    height: 80%;
+    line-height: 1em;
+}
+
+.clientSummary{
+    background-color: white;
+    display: block;
+    border: black;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    width: 70%;
+    font-size: 16px;
+    border-radius: 5px;
+    height: 100px;
+    padding: 0 0;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    margin-left: 15%;
+    line-height: 3px;
+    position: relative;
+    box-shadow: 5px 5px 15px black;   
+}
+
+.shopper{
+    margin-top:3%;
+    height: 80%;
+    display: block;
+    float: left;
+    position: relative;
+    width: 34%;
+}
+
+
 /***********************************/
 /* overlay styling */
 /***********************************/
@@ -170,43 +206,6 @@ color: white;
 .form{
     vertical-align: middle;
 }
-
-.shopper{
-    margin-top:3%;
-    height: 80%;
-    display: block;
-    float: left;
-    position: relative;
-    width: 34%;
-
-}
-
-.clientSummaryText{
-    position: relative;
-    width: 64%;
-    height: 80%;
-    line-height: 1em;
-}
-
-.clientSummary{
-    background-color: white;
-    display: block;
-    border: black;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    width: 70%;
-    font-size: 16px;
-    border-radius: 5px;
-    height: 100px;
-    padding: 0 0;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    margin-left: 15%;
-    line-height: 3px;
-    position: relative;
-    box-shadow: 5px 5px 15px black;   
-}
-
 #overlay {
     position: fixed;
     display: none;

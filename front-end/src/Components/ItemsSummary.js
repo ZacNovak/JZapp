@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './ClientComp.css';
+import './componentStyles.css';
 import image from './img/basket.png';
 
 

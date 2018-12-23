@@ -3,6 +3,7 @@ import './App.css';
 import ClientList from './Components/ClientsList.js';
 import InvoicesList from './Components/InvoicesList.js';
 import ItemsList from './Components/ItemsList';
+import ClientOverlay from './Components/ClientOverlay';
 
 class App extends Component {
   constructor() {
@@ -14,7 +15,9 @@ class App extends Component {
       clientId: null,
       clientName: null,
       invoiceId: null,
-      clientLength: null
+      showClientEditor:false,
+      showInvoiceEditor:false,
+      showItemEditor:false,
     }
   }
 
@@ -29,7 +32,8 @@ class App extends Component {
   onClient = (e) => {
     this.setState({itemsToShow:null});
     this.setState({clientId: e.currentTarget.id});
-    this.setState({clientName: e.target.getElementsByClassName('clientName')[0].textContent})
+    this.setState({clientName: e.currentTarget.getElementsByClassName('clientName')[0].textContent});
+
     fetch('http://localhost:5000/clients', {
                 method: 'post',
                 headers: {'Content-type':'application/json'},
@@ -84,12 +88,14 @@ class App extends Component {
             .then(data => this.setState({invoicesToShow:data}))
   }
 
-  // update the client list after an client has been modified
+  // update the client list after a new client has been added
   updateClientList = () => {
     fetch('http://localhost:5000/all_clients')
     .then(response=> response.json())
     .then(data => this.setState({clientsToShow:data}))
     
+    //CREATE NEW FETCH TO GET CLIENT NAME BY ID???
+    //this.setState({clientName:nameStr});  
   }
 
   // update the client list after a new client has been added
@@ -118,7 +124,7 @@ class App extends Component {
 
   // remove a client
   removeClient = (e) => {
-    this.setState({invoicesToShow:null});
+    this.setState({invoicesToShow:null, itemsToShow:null});
     if (!e) var e = window.event;
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
@@ -175,6 +181,36 @@ class App extends Component {
     .then(data => this.setState({itemsToShow:data}))
   }
 
+  // provide a window to update a client 
+  openClientEditor = (e) => {
+    console.log(e.currentTarget.id);
+    this.setState({showClientEditor:true});
+  }
+
+  closeClientEditor = () => {
+    this.setState({showClientEditor:false});
+  }
+
+  // provide a window to update an invoice 
+  openInvoiceEditor = (e) => {
+    console.log(e.currentTarget.id);
+    this.setState({showInvoiceEditor:true});
+  }
+
+  closeInvoiceEditor = () => {
+    this.setState({showInvoiceEditor:false});
+  }
+
+  // provide a window to update an item 
+  openItemEditor = (e) => {
+    console.log(e.currentTarget.id);
+    this.setState({showItemEditor:true});
+  }
+
+  closeItemEditor = () => {
+    this.setState({showItemEditor:false});
+  }
+
   render() {
     return (
       <div>
@@ -183,7 +219,33 @@ class App extends Component {
             <h1> Welcome to JZ Store of Goodies</h1>
           </header>
         </div>
+        { this.state.showClientEditor && <ClientOverlay 
+                  clientId={this.state.clientId} 
+                  clientName={this.state.clientName}
+                  openClientEditor={this.openClientEditor}
+                  closeClientEditor={this.closeClientEditor} 
+                  updateClients={this.updateClientList}
+                  /> 
+        }
 
+        {/* { this.state.showInvoiceEditor && <InvoiceOverlay 
+                  clientId={this.state.clientId} 
+                  clientName={this.state.clientName}
+                  openClientEditor={this.openClientEditor}
+                  closeClientEditor={this.closeClientEditor} 
+                  updateClients={this.updateClientList}
+                  /> 
+        }
+
+        { this.state.showItemEditor && <ItemOverlay 
+                  clientId={this.state.clientId} 
+                  clientName={this.state.clientName}
+                  openClientEditor={this.openClientEditor}
+                  closeClientEditor={this.closeClientEditor} 
+                  updateClients={this.updateClientList}
+                  /> 
+        } */}
+        
         <div className="background">
             <div className="flex-container">
                 <div className="col-4">
@@ -191,7 +253,7 @@ class App extends Component {
                   <ClientList clientsToShow={this.state.clientsToShow} 
                   onClient={this.onClient}
                   rmFunc={this.removeClient}
-                  updateclients={this.updateClientList}
+                  updateclients={this.openClientEditor}
                   updateClientsAdd={this.updateClientListAdd}
                   clientId={this.state.clientId}
                   />
