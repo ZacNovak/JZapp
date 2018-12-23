@@ -4,6 +4,7 @@ import ClientList from './Components/ClientsList.js';
 import InvoicesList from './Components/InvoicesList.js';
 import ItemsList from './Components/ItemsList';
 import ClientOverlay from './Components/ClientOverlay';
+import InvoiceOverlay from './Components/InvoiceOverlay';
 
 class App extends Component {
   constructor() {
@@ -222,22 +223,20 @@ class App extends Component {
         { this.state.showClientEditor && <ClientOverlay 
                   clientId={this.state.clientId} 
                   clientName={this.state.clientName}
-                  openClientEditor={this.openClientEditor}
                   closeClientEditor={this.closeClientEditor} 
                   updateClients={this.updateClientList}
                   /> 
         }
 
-        {/* { this.state.showInvoiceEditor && <InvoiceOverlay 
-                  clientId={this.state.clientId} 
-                  clientName={this.state.clientName}
-                  openClientEditor={this.openClientEditor}
-                  closeClientEditor={this.closeClientEditor} 
-                  updateClients={this.updateClientList}
+        { this.state.showInvoiceEditor && <InvoiceOverlay 
+                  invoiceId={this.state.invoiceId} 
+                  clientId={this.state.clientId}
+                  closeInvoiceEditor={this.closeInvoiceEditor} 
+                  updateInvoiceList={this.updateInvoiceList}
                   /> 
         }
 
-        { this.state.showItemEditor && <ItemOverlay 
+        {/* { this.state.showItemEditor && <ItemOverlay 
                   clientId={this.state.clientId} 
                   clientName={this.state.clientName}
                   openClientEditor={this.openClientEditor}
@@ -264,7 +263,7 @@ class App extends Component {
                   <InvoicesList 
                   invoicesToShow={this.state.invoicesToShow} 
                   onInvoice={this.onInvoice} 
-                  updateInvoiceList={this.updateInvoiceList} 
+                  updateInvoiceList={this.openInvoiceEditor} 
                   updateInvoiceListAdd={this.updateInvoiceListAdd} 
                   clientId={this.state.clientId}
                   rmInvoice={this.removeInvoice}
