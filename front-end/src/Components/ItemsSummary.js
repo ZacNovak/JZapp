@@ -6,19 +6,8 @@ import image from './img/basket.png';
 
 
 class ItemsSummary extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-        };
-       
-    }
-
-
     
     render(){
-
-
-
 
         let quantity = 0;
         this.props.itemsList.forEach((item) => {
@@ -27,8 +16,8 @@ class ItemsSummary extends Component {
 
         let price = null;
         this.props.itemsList.forEach((item) => {
-            console.log(item.price)
-            console.log(item.price.substring(1))
+            // console.log(item.price)
+            // console.log(item.price.substring(1))
             price += (item.price.substring(1) * item.quantity);
         });
 
@@ -40,7 +29,7 @@ class ItemsSummary extends Component {
         } 
 
 
-        console.log(this.props.itemsList)
+        // console.log(this.props.itemsList)
 
         return (
             <div className="clientSummary">

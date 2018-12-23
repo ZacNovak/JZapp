@@ -16,10 +16,9 @@ class ItemsList extends Component {
                     removeItem={this.props.removeItem}
                     invoiceId={this.props.invoiceId}
                     updateItemList={this.props.updateItemList}
-
                     />
                     <AddNewItem 
-                    updateItemList={this.props.updateItemList}
+                    updateItemList={this.props.updateItemListAdd}
                     invoiceId={this.props.invoiceId}
                     />
                     <ItemsSummary 
@@ -46,23 +45,7 @@ class ItemsList extends Component {
 // -------------------------------------------------------------- //
 
 class ListOfItems extends Component{
-    constructor(props){
-        super(props);
-        this.state = { 
-            updateId: ""
-        };
-    }
-    
-    on = (e) => {
-        if (!e) var e = window.event;
-        e.cancelBubble = true;
-        if (e.stopPropagation) e.stopPropagation();
-        // console.log(e.target.id);
-        this.setState({updateId: e.target.id});
-        document.getElementById("overlay-items").style.display = "block";
-    }
 
-    
     render(){
     if (this.props.itemsList) {
         let itemsArr = this.props.itemsList;
@@ -78,12 +61,8 @@ class ListOfItems extends Component{
             name={itemsArr[i].name}
             price={itemsArr[i].price}
             removeItem={this.props.removeItem}
-            on={this.on}
-            updateId={this.state.updateId}
             invoiceId={this.props.invoiceId}
             updateItemList={this.props.updateItemList}
-
-
             />
         );
         return (
@@ -96,107 +75,20 @@ class ListOfItems extends Component{
 }
 
 class SingleItem extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            name: " ",
-            price: " ",
-            quanity: " "
-        };
-        this.updateItemList = this.props.updateItemList;
-    }
-
-    off = (e) => {
-        document.getElementById("overlay-items").style.display = "none";
-
-    }
-
-    handleNameChange = (event) => {
-        this.setState({name: event.target.value});
-    }
-
-    handlePriceChange = (event) => {
-        this.setState({price: event.target.value});
-        let newgst = this.state.price*0.05;
-        this.setState({gst:newgst});
-    }
-
-    handleQuantityChange = (event) => {
-        this.setState({quantity: event.target.value});
-    }
-
-
-    
-    handleSubmit = (event) => {
-        console.log('An item was submitted names: ' + this.state.name + 'with a price of ' + this.state.price + 
-        'with an invoiceid of' + this.props.invoiceId + 'ItemID of' + this.props.updateId);
-        
-        event.preventDefault();
-
-        let data = {
-            id: this.props.updateId,
-            name:this.state.name,
-            price:this.state.price,
-            gst: this.state.gst,
-            quantity: this.state.quantity,
-            invoice_id: this.props.invoiceId
-        }
- 
-        fetch('http://localhost:5000/updateItem', {
-                method: 'put',
-                headers: {'Content-type':'application/json'},
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(this.updateItemList)
-            .then(this.off)
-            .then(this.setState({name: ""}))
-            .then(this.setState({price: ""}))
-            .then(this.setState({quantity: ""}))
-
-    }
-
     render(){
-    return(
-        <div>
-            <div className='card invoiceCard' id={this.props.id}>
-                <p className="invoicesText">
-                <strong>{this.props.name}</strong> <br></br>
-                Quantity: {this.props.quantity} <br></br>
-                Price: {this.props.price}</p> 
-                <div className="cardButtons">
-                    <button id={this.props.id} onClick={this.props.removeItem}>x</button>
-                    <button id={this.props.id} onClick={this.props.on}>Edit</button>  
-                </div>
-            </div>
-            <div id ="overlay-items">
-                <div className="modal-items">
-                    <h1>Update Items</h1>
-                    
-                    <div className="form">
-                        <form id={this.props.id} onSubmit={this.handleSubmit}>
-                            <label>
-                                Name:
-                                <input type="text" value={this.state.name} onChange={this.handleNameChange}/>
-                                </label>
-                                <br/>
-                            <label>
-                                Price:
-                                <input type="text" value={this.state.price} onChange={this.handlePriceChange}/>
-                                </label>
-                                <br/>
-                            <label>
-                                Quantity:
-                                <input type="text" value={this.state.quantity} onChange={this.handleQuantityChange}/>
-                                </label>
-                                <br/>
-                            <input className="button" type="submit" value="Submit" />
-                        </form>
-                        <button onClick={this.off}>Exit</button>
+        return(
+            <div>
+                <div className='card invoiceCard' id={this.props.id}>
+                    <p className="invoicesText">
+                    <strong>{this.props.name}</strong> <br></br>
+                    Quantity: {this.props.quantity} <br></br>
+                    Price: {this.props.price}</p> 
+                    <div className="cardButtons">
+                        <button id={this.props.id} onClick={this.props.removeItem}>x</button>
+                        <button id={this.props.id} onClick={this.props.updateItemList}>Edit</button>  
                     </div>
                 </div>
             </div>
-        </div>
         );    
     }
 }

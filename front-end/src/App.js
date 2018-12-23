@@ -5,6 +5,7 @@ import InvoicesList from './Components/InvoicesList.js';
 import ItemsList from './Components/ItemsList';
 import ClientOverlay from './Components/ClientOverlay';
 import InvoiceOverlay from './Components/InvoiceOverlay';
+import ItemOverlay from './Components/ItemOverlay';
 
 class App extends Component {
   constructor() {
@@ -16,6 +17,7 @@ class App extends Component {
       clientId: null,
       clientName: null,
       invoiceId: null,
+      itemId: null,
       showClientEditor:false,
       showInvoiceEditor:false,
       showItemEditor:false,
@@ -111,7 +113,7 @@ class App extends Component {
   }
 
   // update the item list after an item has been modified or added
-  updateItemList = () => {
+  updateItemListAdd = () => {
     fetch('http://localhost:5000/invoices', {
                 method: 'post',
                 headers: {'Content-type':'application/json'},
@@ -183,8 +185,7 @@ class App extends Component {
   }
 
   // provide a window to update a client 
-  openClientEditor = (e) => {
-    console.log(e.currentTarget.id);
+  openClientEditor = () => {
     this.setState({showClientEditor:true});
   }
 
@@ -193,8 +194,7 @@ class App extends Component {
   }
 
   // provide a window to update an invoice 
-  openInvoiceEditor = (e) => {
-    console.log(e.currentTarget.id);
+  openInvoiceEditor = () => {
     this.setState({showInvoiceEditor:true});
   }
 
@@ -204,7 +204,8 @@ class App extends Component {
 
   // provide a window to update an item 
   openItemEditor = (e) => {
-    console.log(e.currentTarget.id);
+    console.log('Item id? ', e.currentTarget.id);
+    this.setState({itemId:e.currentTarget.id});
     this.setState({showItemEditor:true});
   }
 
@@ -236,14 +237,13 @@ class App extends Component {
                   /> 
         }
 
-        {/* { this.state.showItemEditor && <ItemOverlay 
-                  clientId={this.state.clientId} 
-                  clientName={this.state.clientName}
-                  openClientEditor={this.openClientEditor}
-                  closeClientEditor={this.closeClientEditor} 
-                  updateClients={this.updateClientList}
+        { this.state.showItemEditor && <ItemOverlay 
+                  updateId={this.state.itemId} 
+                  invoiceId={this.state.invoiceId}
+                  closeItemEditor={this.closeItemEditor} 
+                  updateItems={this.updateItemListAdd}
                   /> 
-        } */}
+        }
         
         <div className="background">
             <div className="flex-container">
@@ -275,7 +275,8 @@ class App extends Component {
                 <div className="col-4">
                   <h2 className="heading">Items</h2>
                   <ItemsList itemsToShow={this.state.itemsToShow}
-                    updateItemList={this.updateItemList}
+                    updateItemList={this.openItemEditor}
+                    updateItemListAdd={this.updateItemListAdd}
                     invoiceId={this.state.invoiceId}
                     removeItem={this.removeItem}
                     clientId={this.state.clientId}
